@@ -5,6 +5,12 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionBlockchain", "ElectionBlockchain\ElectionBlockchain.csproj", "{50522E2F-6531-4E42-B50D-AC10ACCD930D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionBlockchain.Services", "ElectionBlockchain.Services\ElectionBlockchain.Services.csproj", "{AD04D83E-8D95-4A42-81F4-9B8D432DCA77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionBlockchain.Model", "ElectionBlockchain.Model\ElectionBlockchain.Model.csproj", "{03C8D260-0B0B-4836-B68F-6F321C505696}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionBlockchain.DAL", "ElectionBlockchain.DAL\ElectionBlockchain.DAL.csproj", "{F509A5B6-F1A6-44E6-B921-B7C7889B7253}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{50522E2F-6531-4E42-B50D-AC10ACCD930D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50522E2F-6531-4E42-B50D-AC10ACCD930D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50522E2F-6531-4E42-B50D-AC10ACCD930D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD04D83E-8D95-4A42-81F4-9B8D432DCA77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD04D83E-8D95-4A42-81F4-9B8D432DCA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD04D83E-8D95-4A42-81F4-9B8D432DCA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD04D83E-8D95-4A42-81F4-9B8D432DCA77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03C8D260-0B0B-4836-B68F-6F321C505696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03C8D260-0B0B-4836-B68F-6F321C505696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03C8D260-0B0B-4836-B68F-6F321C505696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03C8D260-0B0B-4836-B68F-6F321C505696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F509A5B6-F1A6-44E6-B921-B7C7889B7253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F509A5B6-F1A6-44E6-B921-B7C7889B7253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F509A5B6-F1A6-44E6-B921-B7C7889B7253}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F509A5B6-F1A6-44E6-B921-B7C7889B7253}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

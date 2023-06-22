@@ -20,7 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\ElectionBlockchain.Model\ElectionBlockchain.Model.csproj" />
+    <ProjectReference Include="..\ElectionBlockchain.DAL\ElectionBlockchain.DAL.csproj" />
+    <ProjectReference Include="..\ElectionBlockchain.Services\ElectionBlockchain.Services.csproj" />
   </ItemGroup>
 
 </Project>
