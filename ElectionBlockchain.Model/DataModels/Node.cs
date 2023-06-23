@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ElectionBlockchain.Model.DataModels
 {
-   internal class Node
+   public class Node
    {
+      public int Id { get; set; }
+      public string IpAddress { get; set; }
+      public string PublicKey { get; set; }
    }
 }

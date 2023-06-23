@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ElectionBlockchain.Model.DataModels
 {
-   internal class Citizen
+   public class Citizen
    {
+      public string DocumentId { get; set; }
+      public string PublicKey { get; set; }
+      public virtual Vote? Vote { get; set; }
+      public int? VoteId { get; set; }
    }
 }
