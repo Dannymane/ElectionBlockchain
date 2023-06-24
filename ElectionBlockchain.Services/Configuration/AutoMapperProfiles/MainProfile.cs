@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using ElectionBlockchain.Model.DataModels;
+using System.Text.RegularExpressions;
 
-namespace ElectionBlockchain.Services.Configuration.AutoMapperProfiles
+namespace SchoolRegister.Services.Configuration.AutoMapperProfiles;
+public class MainProfile : Profile
 {
-   internal class MainProfile
+   public MainProfile()
    {
+      CreateMap<VoteQueue, Vote>(); // map from VoteQueue(src) to Vote(dst)
+
    }
 }
