@@ -1,16 +1,17 @@
-﻿using AutoMapper;
+using AutoMapper;
 using ElectionBlockchain.Model.DataModels;
 using ElectionBlockchain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace ElectionBlockchain.API.Controllers
 {
    [ApiController]
    [Route("[controller]")]
-   public class SetupController : BaseController
+   public class DatabaseController : BaseController
    {
       private readonly IDatabaseService _databaseService;
-      public SetupController(IDatabaseService _databaseService, IMapper mapper) : base(mapper)
+      public DatabaseController(IDatabaseService _databaseService, IMapper mapper) : base(mapper)
       {
          _databaseService = _databaseService;
       }
@@ -18,17 +19,26 @@ namespace ElectionBlockchain.API.Controllers
       [HttpPost("addnode")]
       public async Task<IActionResult> AddNodeASync([FromBody] Node node)
       {
-         Task<Node> n = await _databaseService.AddNodeAsync(node);
+         Node n = await _databaseService.AddNodeAsync(node);
+         if (n == null)
+            return BadRequest("Node is not valid");
 
          return Ok(n);
       }
 
 
-      [HttpDelete("cleantable/{table}")]
+      [HttpDelete("tables/{table}")]
       public void Clean(string table)
       {
          _databaseService.CleanAsync(table);
       }
 
+      [HttpGet("tables/{table}")]
+      public async Task<IActionResult> GetTableAsync(string table)
+      {
+         var tableData = _databaseService.GetTableAsync(table);
+         var body = new StringContent(tableData.ToString(), Encoding.UTF8, "application/json");
+         return Ok(body);
+      }
    }
 }

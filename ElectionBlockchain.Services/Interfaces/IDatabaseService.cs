@@ -11,5 +11,6 @@ namespace ElectionBlockchain.Services.Interfaces
    {
       Task<Node> AddNodeAsync(Node node);
       void CleanAsync(string table);
+      Task<string> GetTableAsync(string table);
    }
 }
