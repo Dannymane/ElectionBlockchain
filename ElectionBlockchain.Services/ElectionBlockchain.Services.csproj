@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\ElectionBlockchain.Model\ElectionBlockchain.Model.csproj" />
     <ProjectReference Include="..\ElectionBlockchain.DAL\ElectionBlockchain.DAL.csproj" />

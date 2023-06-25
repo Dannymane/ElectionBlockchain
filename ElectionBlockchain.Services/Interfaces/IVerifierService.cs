@@ -9,10 +9,12 @@ namespace ElectionBlockchain.Services.Interfaces
 {
    public interface IVerifierService
    {
-      Task<bool> VerifyVote(VoteQueue voteQueue);
-      Task<bool> VerifyVotes(string requestBodyWithVotes);
-      string SignVoteByLeader(List<VoteQueue> voteQueues);
+      Task<bool> VerifyVotesAsync(string requestBodyWithVotes);
       void SendConfirmationToLeader(string confirmation);
+
+      //Task<string> SignVotesAsync(List<VoteQueue> voteQueues, string privateKey); //in BaseNodeService
+      //Task<bool> VerifyVoteAsync(VoteQueue voteQueue); //in BaseNodeService
+
 
    }
 }

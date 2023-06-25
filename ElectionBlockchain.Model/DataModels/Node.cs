@@ -8,8 +8,8 @@ namespace ElectionBlockchain.Model.DataModels
 {
    public class Node
    {
-      public int Id { get; set; }
-      public string IpAddress { get; set; }
-      public string PublicKey { get; set; }
+      public int? Id { get; set; }
+      public string? IpAddress { get; set; }
+      public string? PublicKey { get; set; }
    }
 }

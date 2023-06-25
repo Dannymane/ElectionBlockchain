@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 public class ApplicationDbContext : DbContext
 {
    // table properties
-   public virtual DbSet<Node> Nodes { get; set; }
+   public virtual DbSet<Node>? Nodes { get; set; }
    public virtual DbSet<Citizen> Citizens { get; set; }
    public virtual DbSet<Candidate> Candidates { get; set; }
    public virtual DbSet<Block> Blocks { get; set; }
@@ -61,14 +61,6 @@ public class ApplicationDbContext : DbContext
       modelBuilder.Entity<Citizen>()
          .Property(c => c.DocumentId)
          .HasMaxLength(6);
-
-      modelBuilder.Entity<Node>()
-         .Property(n => n.IpAddress)
-         .IsRequired();
-
-      modelBuilder.Entity<Node>()
-         .Property(n => n.PublicKey)
-         .IsRequired();
 
       modelBuilder.Entity<Vote>()
          .HasKey(v => v.CitizenDocumentId);

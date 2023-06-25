@@ -1,3 +1,5 @@
+using ElectionBlockchain.Services.ConcreteServices;
+using ElectionBlockchain.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 
@@ -11,9 +13,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<IDatabaseService, DatabaseService>();
+builder.Services.AddScoped<ILeaderService, LeaderService>();
+builder.Services.AddScoped<IVerifierService, VerifierService>();
 
 builder.Services.AddControllers(); 
 
