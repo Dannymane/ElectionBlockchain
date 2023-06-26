@@ -11,9 +11,9 @@ namespace ElectionBlockchain.API.Controllers
    public class DatabaseController : BaseController
    {
       private readonly IDatabaseService _databaseService;
-      public DatabaseController(IDatabaseService _databaseService, IMapper mapper) : base(mapper)
+      public DatabaseController(IDatabaseService databaseService, IMapper mapper) : base(mapper)
       {
-         _databaseService = _databaseService;
+         _databaseService = databaseService;
       }
       //3 nodes will be added in a special order, 1- Verifier1 2- Verifier2 3- Leader
       [HttpPost("addnode")]
@@ -30,15 +30,14 @@ namespace ElectionBlockchain.API.Controllers
       [HttpDelete("tables/{table}")]
       public void Clean(string table)
       {
-         _databaseService.CleanAsync(table);
+         _databaseService.Clean(table);
       }
 
       [HttpGet("tables/{table}")]
       public async Task<IActionResult> GetTableAsync(string table)
-      {
-         var tableData = _databaseService.GetTableAsync(table);
-         var body = new StringContent(tableData.ToString(), Encoding.UTF8, "application/json");
-         return Ok(body);
+      { //must be await _databaseService, without await I have to use .Result
+         var tableData = await _databaseService.GetTableAsync(table);
+         return Ok(tableData);
       }
    }
 }

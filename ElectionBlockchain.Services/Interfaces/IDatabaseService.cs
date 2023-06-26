@@ -1,4 +1,5 @@
 ﻿using ElectionBlockchain.Model.DataModels;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace ElectionBlockchain.Services.Interfaces
    public interface IDatabaseService
    {
       Task<Node> AddNodeAsync(Node node);
-      void CleanAsync(string table);
+      void Clean(string table);
       Task<string> GetTableAsync(string table);
    }
 }

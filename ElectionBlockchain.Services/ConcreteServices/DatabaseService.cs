@@ -34,35 +34,32 @@ namespace ElectionBlockchain.Services.ConcreteServices
          await DbContext.SaveChangesAsync();
          return n.Entity;
       }
-      public async void CleanAsync(string table)
+      public  void Clean(string table)
       {
-         await DbContext.Database.ExecuteSqlRawAsync($"TRUNCATE TABLE {table}");
+         DbContext.Database.ExecuteSqlRawAsync($"TRUNCATE TABLE [{table}]");
       }
 
       public async Task<string> GetTableAsync(string table)
       {
+         table = table.ToLower();
          //that is sad that EF Core does not support smth like DbContext.Database.SqlQuery<string>($"SELECT * FROM {table}").ToList();
          switch (table)
          {
-            case "Nodes":
-               return JsonSerializer.Serialize<IList<Node>>(await DbContext.Nodes.ToListAsync()); 
-            case "Blocks":
-               return JsonSerializer.Serialize<IList<Block>>(await DbContext.Blocks.ToListAsync()); 
-            case "Citizens":
-               return JsonSerializer.Serialize<IList<Citizen>>(await DbContext.Citizens.ToListAsync()); 
-            case "Votes":
+            case "nodes":
+               return JsonSerializer.Serialize<IList<Node>>(await DbContext.Nodes.ToListAsync());
+            case "blocks":
+               return JsonSerializer.Serialize<IList<Block>>(await DbContext.Blocks.ToListAsync());
+            case "citizens":
+               return JsonSerializer.Serialize<IList<Citizen>>(await DbContext.Citizens.ToListAsync());
+            case "votes":
                return JsonSerializer.Serialize<IList<Vote>>(await DbContext.Votes.ToListAsync());
-            case "VotesQueue":
+            case "votesqueue":
                return JsonSerializer.Serialize<IList<VoteQueue>>(await DbContext.VotesQueue.ToListAsync());
-            case "Candidates":
+            case "candidates":
                return JsonSerializer.Serialize<IList<Candidate>>(await DbContext.Candidates.ToListAsync());
          }
 
          return "Table not found";
-
-
-
-
       }
    }
 }
