@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using ElectionBlockchain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,8 @@ namespace ElectionBlockchain.Services.ConcreteServices
 {
    public class LeaderService : BaseNodeService, ILeaderService
    {
-      public LeaderService(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+      public LeaderService(ApplicationDbContext dbContext, IMapper mapper)
+         : base(dbContext, mapper)
       {
 
       }
@@ -26,5 +28,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
       {
          throw new NotImplementedException();
       }
+
+
    }
 }

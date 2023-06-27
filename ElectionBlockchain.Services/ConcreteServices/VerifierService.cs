@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ElectionBlockchain.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,8 @@ namespace ElectionBlockchain.Services.ConcreteServices
 {
    public class VerifierService : BaseNodeService, IVerifierService
    {
-      public VerifierService(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+      public VerifierService(ApplicationDbContext dbContext, IMapper mapper)
+         : base(dbContext, mapper)
       {
       }
 

@@ -3,6 +3,7 @@ using ElectionBlockchain.Model.DataModels;
 using ElectionBlockchain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace ElectionBlockchain.API.Controllers
 {
@@ -39,5 +40,20 @@ namespace ElectionBlockchain.API.Controllers
          var tableData = await _databaseService.GetTableAsync(table);
          return Ok(tableData);
       }
+
+      [HttpGet("node/id")]
+      public  IActionResult GetNodeId()
+      {
+         var configuration = new ConfigurationBuilder()
+          .SetBasePath(Directory.GetCurrentDirectory())
+          .AddJsonFile("appsettings.json")
+          .Build();
+
+         string myVariableValue = configuration["NodeId"];
+         return Ok(myVariableValue);
+
+      }
+
+
    }
 }
