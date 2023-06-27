@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ElectionBlockchain.Model.DataModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -29,14 +30,15 @@ namespace ElectionBlockchain.Services.ConcreteServices
          return " ";
       }
 
-      public async Task<bool> VerifyVoteAsync(VoteQueue VQ)
+      public async Task<bool> VerifyVoteAsync(VoteQueue vote)
       {
-      //    public string CitizenDocumentId { get; set; }
-      //public string CitizenSignature { get; set; }
-      //public int CandidateId { get; set; }
+         string CitizenPublicKey = await DbContext.Citizens.Where(c => c.DocumentId == vote.CitizenDocumentId)
+            .Select(c => c.PublicKey).FirstOrDefaultAsync();
 
-         if(VerifySignedHash(VQ.CitizenDocumentId+VQ.CandidateId,)
-         return true;
+         if (VerifySignedHash(vote.CitizenDocumentId + vote.CandidateId, vote.CitizenSignature, CitizenPublicKey))
+            return true;
+
+      return false;
       }
       public int GetNodeId()
       {

@@ -13,15 +13,14 @@ class Program
          ASCIIEncoding ByteConverter = new ASCIIEncoding();
 
          string dataString = "Data to Sign";
-         int i = 2;
-            Console.WriteLine("22"+i);
-            //// Create byte arrays to hold original, encrypted, and decrypted data.
-            //byte[] originalData = ByteConverter.GetBytes(dataString);
-            //byte[] signedData;
 
-            // Create a new instance of the RSACryptoServiceProvider class
-            // and automatically create a new key-pair.
-            RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
+         //// Create byte arrays to hold original, encrypted, and decrypted data.
+         //byte[] originalData = ByteConverter.GetBytes(dataString);
+         //byte[] signedData;
+
+         // Create a new instance of the RSACryptoServiceProvider class
+         // and automatically create a new key-pair.
+         RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
 
 
          RSAParameters PublicPrivateKey2 = RSAalg.ExportParameters(true);

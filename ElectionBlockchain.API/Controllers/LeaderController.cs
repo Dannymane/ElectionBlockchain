@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ElectionBlockchain.Model.DataModels;
 using ElectionBlockchain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,10 +20,17 @@ namespace ElectionBlockchain.API.Controllers
       }
 
       [HttpPost("node/{id}")]
-      public IActionResult GetNodeId(int id)
+      public IActionResult PostNodeId(int id)
       {
          _leaderService.SetNodeId(id);
          return Ok(_leaderService.GetNodeId());
+      }
+
+      [HttpPost("vote")]
+      public async Task<IActionResult> PostVoteAsync([FromBody] VoteQueue vote)
+      {
+         string result = await _leaderService.AddVoteQueueToQueueAsync(vote);
+         return Ok(result);
       }
    }
 }

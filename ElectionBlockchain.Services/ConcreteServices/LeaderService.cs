@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ElectionBlockchain.Model.DataModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace ElectionBlockchain.Services.ConcreteServices
 {
@@ -16,9 +18,21 @@ namespace ElectionBlockchain.Services.ConcreteServices
       {
 
       }
-      public void AddVoteQueueToQueueAsync(string voteString)
+      public async Task<string> AddVoteQueueToQueueAsync(VoteQueue vote)
       {
-         throw new NotImplementedException();
+         try
+         {
+            if (await VerifyVoteAsync(vote))
+            {
+               await DbContext.VotesQueue.AddAsync(vote);
+               await DbContext.SaveChangesAsync();
+               return "The vote is verified and added to queue";
+            }
+            else
+               return "The vote is not verified";
+         }catch (Exception ex){
+            return ex.Message;
+         }
       }
       public bool CreateAndAddNextBlock()
       {
