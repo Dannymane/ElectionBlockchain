@@ -93,6 +93,20 @@ namespace ElectionBlockchain.DAL.Migrations
                     b.ToTable("Citizens");
                 });
 
+            modelBuilder.Entity("ElectionBlockchain.Model.DataModels.CitizenPrivateKey", b =>
+                {
+                    b.Property<string>("DocumentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PrivateKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DocumentId");
+
+                    b.ToTable("CitizenPrivateKeys");
+                });
+
             modelBuilder.Entity("ElectionBlockchain.Model.DataModels.Node", b =>
                 {
                     b.Property<int?>("Id")
@@ -179,7 +193,7 @@ namespace ElectionBlockchain.DAL.Migrations
                     b.HasOne("ElectionBlockchain.Model.DataModels.Citizen", "Citizen")
                         .WithOne("Vote")
                         .HasForeignKey("ElectionBlockchain.Model.DataModels.Vote", "CitizenDocumentId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Block");

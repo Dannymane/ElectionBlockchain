@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElectionBlockchain.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230625090231_m1")]
+    [Migration("20230628091812_m1")]
     partial class m1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,20 +95,32 @@ namespace ElectionBlockchain.DAL.Migrations
                     b.ToTable("Citizens");
                 });
 
-            modelBuilder.Entity("ElectionBlockchain.Model.DataModels.Node", b =>
+            modelBuilder.Entity("ElectionBlockchain.Model.DataModels.CitizenPrivateKey", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("DocumentId")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("IpAddress")
+                    b.Property<string>("PrivateKey")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("DocumentId");
+
+                    b.ToTable("CitizenPrivateKeys");
+                });
+
+            modelBuilder.Entity("ElectionBlockchain.Model.DataModels.Node", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+
+                    b.Property<string>("IpAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PublicKey")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -183,7 +195,7 @@ namespace ElectionBlockchain.DAL.Migrations
                     b.HasOne("ElectionBlockchain.Model.DataModels.Citizen", "Citizen")
                         .WithOne("Vote")
                         .HasForeignKey("ElectionBlockchain.Model.DataModels.Vote", "CitizenDocumentId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Block");

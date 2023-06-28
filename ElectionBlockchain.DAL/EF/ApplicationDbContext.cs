@@ -15,6 +15,8 @@ public class ApplicationDbContext : DbContext
    public virtual DbSet<Vote> Votes { get; set; } //accepted votes
    public virtual DbSet<VoteQueue> VotesQueue { get; set; } //for storing incoming votes
 
+   public virtual DbSet<CitizenPrivateKey> CitizenPrivateKeys { get; set; } //the real app shouldn't store private keys in the database
+   //CitizenPrivateKeys only for future testing and for the comfort of code presentation
    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
    : base(options) { }
    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -38,6 +40,7 @@ public class ApplicationDbContext : DbContext
          .HasMany(b => b.Votes)
          .WithOne(v => v.Block)
          .HasForeignKey(v => v.BlockId)
+         //.OnDelete(DeleteBehavior.Cascade);  //For testing. For real app it should be DeleteBehavior.Restrict
          .OnDelete(DeleteBehavior.Restrict);  // prevents block deletion if votes exist
          //.IsRequired(false); // Allow null values for BlockId in Vote table
 
@@ -52,7 +55,8 @@ public class ApplicationDbContext : DbContext
       modelBuilder.Entity<Candidate>()
          .HasMany(c => c.Votes)
          .WithOne(v => v.Candidate)
-         .HasForeignKey(v => v.CandidateId); 
+         .HasForeignKey(v => v.CandidateId); //Cascade
+         //.OnDelete(DeleteBehavior.Cascade);
 
       modelBuilder.Entity<Citizen>()
          .HasKey(c => new { c.DocumentId} );
@@ -70,7 +74,9 @@ public class ApplicationDbContext : DbContext
          .WithOne(c => c.Vote)
          .HasForeignKey<Citizen>(c => c.VoteId)
          .IsRequired(false); // Allow null values for VoteId in Citizen table
+                             //.OnDelete(DeleteBehavior.Cascade);
 
+      //For testing. For real app uncomment this
       modelBuilder.Entity<Vote>()
           .HasOne(v => v.Citizen)
           .WithOne(c => c.Vote)
@@ -80,15 +86,20 @@ public class ApplicationDbContext : DbContext
       modelBuilder.Entity<Citizen>()
           .HasOne(c => c.Vote)
           .WithOne(v => v.Citizen)
-          .HasForeignKey<Vote>(v => v.CitizenDocumentId);
+          .HasForeignKey<Vote>(v => v.CitizenDocumentId)
+          .OnDelete(DeleteBehavior.Cascade);
 
       modelBuilder.Entity<Vote>()
          .HasOne(v => v.Candidate)
          .WithMany(c => c.Votes)
-         .HasForeignKey(v => v.CandidateId);
+         .HasForeignKey(v => v.CandidateId)
+         .OnDelete(DeleteBehavior.Cascade); 
 
       modelBuilder.Entity<VoteQueue>()
          .HasKey(vq => vq.CitizenDocumentId);
+
+      modelBuilder.Entity<CitizenPrivateKey>()
+         .HasKey(cpk => cpk.DocumentId);
 
    }
 }

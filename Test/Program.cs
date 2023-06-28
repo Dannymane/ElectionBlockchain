@@ -5,7 +5,7 @@ using System.Text;
 
 class Program
 {
-   static void Main()
+   static void Mainw()
    {
       try
       {

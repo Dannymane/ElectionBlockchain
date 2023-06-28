@@ -11,7 +11,8 @@ namespace ElectionBlockchain.Services.Interfaces
    public interface IDatabaseService
    {
       Task<Node> AddNodeAsync(Node node);
-      void Clean(string table);
+      int Clean(string table);
       Task<string> GetTableAsync(string table);
+      string ResetCitizensAndRelatedTables();
    }
 }

@@ -32,13 +32,26 @@ namespace ElectionBlockchain.Services.ConcreteServices
 
       public async Task<bool> VerifyVoteAsync(VoteQueue vote)
       {
-         string CitizenPublicKey = await DbContext.Citizens.Where(c => c.DocumentId == vote.CitizenDocumentId)
-            .Select(c => c.PublicKey).FirstOrDefaultAsync();
+         if (await DbContext.VotesQueue.FirstOrDefaultAsync(v => v.CitizenDocumentId == vote.CitizenDocumentId) != null)//for classes default is null
+            return false;
+
+         var candidate = await DbContext.Candidates.FirstOrDefaultAsync(c => c.Id == vote.CandidateId);
+         if (candidate == null)
+            return false;
+
+         var citizen = await DbContext.Citizens.FirstOrDefaultAsync(c => c.DocumentId == vote.CitizenDocumentId);
+         if(citizen == null) return false;
+
+         if (citizen.VoteId != null) return false;
+
+         string? CitizenPublicKey = citizen.PublicKey;
+         if (CitizenPublicKey == null) return false;
+
 
          if (VerifySignedHash(vote.CitizenDocumentId + vote.CandidateId, vote.CitizenSignature, CitizenPublicKey))
             return true;
 
-      return false;
+         return false;
       }
       public int GetNodeId()
       {

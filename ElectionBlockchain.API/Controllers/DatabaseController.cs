@@ -29,29 +29,25 @@ namespace ElectionBlockchain.API.Controllers
 
 
       [HttpDelete("tables/{table}")]
-      public void Clean(string table)
+      public IActionResult Clean(string table)
       {
-         _databaseService.Clean(table);
+         int affectedRows = _databaseService.Clean(table);
+         return Ok("Deleted rows: " + affectedRows);
       }
 
       [HttpGet("tables/{table}")]
       public async Task<IActionResult> GetTableAsync(string table)
       { //must be await _databaseService, without await I have to use .Result
          var tableData = await _databaseService.GetTableAsync(table);
-         return Ok(tableData);
+         return Content(tableData, "application/json");
       }
 
-      [HttpGet("node/id")]
-      public  IActionResult GetNodeId()
+      [HttpGet("resetCitizensAndRelatedTables")]
+      public IActionResult GetResetCitizensAndRelatedTables()
       {
-         var configuration = new ConfigurationBuilder()
-          .SetBasePath(Directory.GetCurrentDirectory())
-          .AddJsonFile("appsettings.json")
-          .Build();
+         string jsonString = _databaseService.ResetCitizensAndRelatedTables();
 
-         string myVariableValue = configuration["NodeId"];
-         return Ok(myVariableValue);
-
+         return Content(jsonString, "application/json");
       }
 
 
