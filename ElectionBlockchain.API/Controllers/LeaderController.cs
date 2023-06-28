@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ElectionBlockchain.API.Controllers
 {
+   [ApiController]
+   [Route("[controller]")]
    public class LeaderController : BaseController
    {
       private readonly ILeaderService _leaderService;

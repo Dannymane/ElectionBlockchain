@@ -29,7 +29,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
                return "The vote is verified and added to queue";
             }
             else
-               return "The vote is not verified";
+               return "The vote is not verified/ already in blockchain/ already in the queue";
          }catch (Exception ex){
             return ex.Message;
          }
