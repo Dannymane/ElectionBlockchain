@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ElectionBlockchain.Model.DataModels;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Security.Cryptography;
 
 namespace ElectionBlockchain.Services.ConcreteServices
 {
@@ -26,6 +28,11 @@ namespace ElectionBlockchain.Services.ConcreteServices
             {
                await DbContext.VotesQueue.AddAsync(vote);
                await DbContext.SaveChangesAsync();
+               
+               int countVotes = await DbContext.VotesQueue.CountAsync();
+               if (countVotes >= 4)
+                  CreateAndAddNextBlock();
+
                return "The vote is verified and added to queue";
             }
             else
@@ -34,9 +41,13 @@ namespace ElectionBlockchain.Services.ConcreteServices
             return ex.Message;
          }
       }
-      public bool CreateAndAddNextBlock()
+      public async Task CreateAndAddNextBlock()
       {
-         throw new NotImplementedException();
+         List<VoteQueue> votes = DbContext.VotesQueue.Take(4).ToList();
+         string signature = SignVotesAsync(votes, )
+
+
+
       }
       public Task<bool> CheckVerifierConfirmationAsync(string confirmation)
       {

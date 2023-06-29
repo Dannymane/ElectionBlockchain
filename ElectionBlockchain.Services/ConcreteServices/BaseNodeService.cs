@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using ElectionBlockchain.Model.DataModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
       protected readonly ApplicationDbContext DbContext = null!;
       protected readonly IMapper Mapper = null!;
       public static int NodeId { get; set; } = 0;
+      public static RSAParameters? PublicPrivateKeyParameter { get; set; } = null;
 
       public BaseNodeService(ApplicationDbContext dbContext, IMapper mapper)
       {
@@ -24,11 +27,6 @@ namespace ElectionBlockchain.Services.ConcreteServices
          Mapper = mapper;
       }
 
-      public async Task<string> SignVotesAsync(List<VoteQueue> voteQueues, string privateKey)
-      {
-
-         return " ";
-      }
 
       public async Task<bool> VerifyVoteAsync(VoteQueue vote)
       {
@@ -53,21 +51,14 @@ namespace ElectionBlockchain.Services.ConcreteServices
 
          return false;
       }
-      public int GetNodeId()
-      {
-         return NodeId;
-      }
 
-      public void SetNodeId(int id)
-      {
-         NodeId = id;
-      }
       //For data is used Encoding.UTF8 to keep the same data not changed
       //For signature is used Convert.ToBase64String because Encoding.UTF8 can't handle it without changing
-      public string HashAndSignBytes(string DataToSign, string PrivateKeyString)
+      public async Task<string> SignVotesAsync(List<VoteQueue> voteQueues, string PrivateKeyString)
       {
          try
          {
+            string DataToSign = JsonConvert.SerializeObject(voteQueues);
             RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
             RSAParameters PrivateKey = JsonConvert.DeserializeObject<RSAParameters>(PrivateKeyString);
             RSAalg.ImportParameters(PrivateKey);
@@ -107,5 +98,43 @@ namespace ElectionBlockchain.Services.ConcreteServices
             return false;
          }
       }
+      //For start setup
+      public int GetNodeId()
+      {
+         return NodeId;
+      }
+
+      public void SetNodeId(int id)
+      {
+         NodeId = id;
+      }
+
+      public async Task SetPublicPrivateKeyAsync(RSAParameters publicPrivateKey)
+      {
+          PublicPrivateKeyParameter = publicPrivateKey;
+      }
+
+      public async Task<string> GetPublicPrivateKeyAsync()
+      {
+         return JsonConvert.SerializeObject(PublicPrivateKeyParameter);
+      }
+
+      public async Task<IEnumerable<string>> GenerateNodeKeysAsync()
+      {
+         RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
+
+         string PublicKey1 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
+         string PrivateKey1 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
+         string PublicKey2 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
+         string PrivateKey2 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
+         string PublicKey3 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
+         string PrivateKey3 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
+         
+         var keys = new List<string> { PublicKey1, PrivateKey1, PublicKey2, PrivateKey2, PublicKey3, PrivateKey3 };
+
+         return keys;
+
+      }
+
    }
 }

@@ -12,7 +12,7 @@ namespace Test
 {
    public class GenerateCitizensKeysAndVotes
    {
-      public static void Main(string[] args)
+      public static void Maine(string[] args)
       {
          Citizen citizen;
          VoteQueue vote;
