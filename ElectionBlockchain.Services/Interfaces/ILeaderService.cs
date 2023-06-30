@@ -1,4 +1,5 @@
 ﻿using ElectionBlockchain.Model.DataModels;
+using ElectionBlockchain.Model.DataTrasferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace ElectionBlockchain.Services.Interfaces
       Task<bool> VerifyVoteAsync(VoteQueue voteQueue);
       int GetNodeId();
       void SetNodeId(int id);
-      Task SetPublicPrivateKeyAsync(RSAParameters publicPrivateKey);
+      public Task SetPublicPrivateKeyAsync(RSAParametersDto publicPrivateKeyString);
       Task<string> GetPublicPrivateKeyAsync();
       Task<string> GenerateNodeKeysAsync();
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ElectionBlockchain.Model.DataModels;
+using ElectionBlockchain.Model.DataTrasferObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -109,9 +110,11 @@ namespace ElectionBlockchain.Services.ConcreteServices
          NodeId = id;
       }
 
-      public async Task SetPublicPrivateKeyAsync(RSAParameters publicPrivateKey)
+      public async Task SetPublicPrivateKeyAsync(RSAParametersDto publicPrivateKeyDto)
       {
-          PublicPrivateKeyParameter = publicPrivateKey;
+         var publicPrivateKeyDtoSerialized = JsonConvert.SerializeObject(publicPrivateKeyDto);
+         RSAParameters publicPrivateKey = JsonConvert.DeserializeObject<RSAParameters>(publicPrivateKeyDtoSerialized);
+         PublicPrivateKeyParameter = publicPrivateKey;
       }
 
       public async Task<string> GetPublicPrivateKeyAsync()

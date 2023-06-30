@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ElectionBlockchain.Model.DataModels;
+using ElectionBlockchain.Model.DataTrasferObjects;
 using ElectionBlockchain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
@@ -40,7 +41,7 @@ namespace ElectionBlockchain.API.Controllers
       }
 
       [HttpPost("node/PrivateKey")]
-      public async Task<IActionResult> PostSetKeyAsync([FromBody] RSAParameters publicPrivateKey)
+      public async Task<IActionResult> PostSetKeyAsync([FromBody] RSAParametersDto publicPrivateKey)
       {
          await _leaderService.SetPublicPrivateKeyAsync(publicPrivateKey);
          var jsonKey = await _leaderService.GetPublicPrivateKeyAsync();
