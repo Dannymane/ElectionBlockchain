@@ -57,7 +57,7 @@ namespace ElectionBlockchain.API.Controllers
       public async Task<IActionResult> GetGenerateNodeKeysAsync()
       {
          var jsonKeys = await _leaderService.GenerateNodeKeysAsync();
-         return Content(jsonKey, "application/json");
+         return Content(jsonKeys, "application/json");
       }
    }
 }
