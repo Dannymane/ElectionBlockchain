@@ -44,7 +44,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
       public async Task CreateAndAddNextBlock()
       {
          List<VoteQueue> votes = DbContext.VotesQueue.Take(4).ToList();
-         string signature = SignVotesAsync(votes, )
+         //string signature = SignVotesAsync(votes, )
 
 
 
@@ -53,7 +53,6 @@ namespace ElectionBlockchain.Services.ConcreteServices
       {
          throw new NotImplementedException();
       }
-
 
    }
 }

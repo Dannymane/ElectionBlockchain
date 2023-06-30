@@ -119,20 +119,34 @@ namespace ElectionBlockchain.Services.ConcreteServices
          return JsonConvert.SerializeObject(PublicPrivateKeyParameter);
       }
 
-      public async Task<IEnumerable<string>> GenerateNodeKeysAsync()
+      public async Task<string> GenerateNodeKeysAsync()
       {
+         var keysParameters = new List<RSAParameters>();
+
          RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
+         keysParameters.Add(RSAalg.ExportParameters(false));
+         keysParameters.Add(RSAalg.ExportParameters(true));
 
-         string PublicKey1 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
-         string PrivateKey1 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
-         string PublicKey2 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
-         string PrivateKey2 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
-         string PublicKey3 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
-         string PrivateKey3 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
+         RSAalg = new RSACryptoServiceProvider();
+         keysParameters.Add(RSAalg.ExportParameters(false));
+         keysParameters.Add(RSAalg.ExportParameters(true));
+
+         RSAalg = new RSACryptoServiceProvider();
+         keysParameters.Add(RSAalg.ExportParameters(false));
+         keysParameters.Add(RSAalg.ExportParameters(true));
+
+         var keysStrings = JsonConvert.SerializeObject(keysParameters);
+
+         //string PublicKey1 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
+         //string PrivateKey1 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
+         //string PublicKey2 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
+         //string PrivateKey2 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
+         //string PublicKey3 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
+         //string PrivateKey3 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
          
-         var keys = new List<string> { PublicKey1, PrivateKey1, PublicKey2, PrivateKey2, PublicKey3, PrivateKey3 };
+         //var keys = new List<string> { PublicKey1, PrivateKey1, PublicKey2, PrivateKey2, PublicKey3, PrivateKey3 };
 
-         return keys;
+         return keysStrings;
 
       }
 
