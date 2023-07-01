@@ -58,7 +58,7 @@ class RSACSPSample
       Console.WriteLine(a.Result);
    }
 
-   static async Task Main()
+   static async Task Main2()
    {
       //await Test1Async();
       //Console.ReadLine();

@@ -15,7 +15,7 @@ namespace ElectionBlockchain.Services.Interfaces
       Task<bool> VerifyVotesAsync(string requestBodyWithVotes);
       void SendConfirmationToLeader(string confirmation);
 
-      Task<string> SignVotesAsync(List<VoteQueue> voteQueues, string privateKey); //in BaseNodeService
+      Task<string> SignVotesAsync(List<VoteQueue> voteQueues); //in BaseNodeService
       Task<bool> VerifyVoteAsync(VoteQueue voteQueue); //in BaseNodeService
       int GetNodeId();
       void SetNodeId(int id);

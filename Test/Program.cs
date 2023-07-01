@@ -5,7 +5,7 @@ using System.Text;
 
 class Program
 {
-   static void Mainw()
+   static void Main()
    {
       try
       {
@@ -35,6 +35,9 @@ class Program
 
          // Verify the data and display the result to the
          // console.
+         byte[] signedDataByte = Encoding.UTF8.GetBytes(signedData);
+         signedData = Encoding.UTF8.GetString(signedDataByte);
+
          if (VerifySignedHash(dataString, signedData, publicKey))
          {
             Console.WriteLine("The data was verified.");
@@ -43,7 +46,8 @@ class Program
          {
             Console.WriteLine("The data does not match the signature.");
          }
-      }
+
+        }
       catch (ArgumentNullException)
       {
          Console.WriteLine("The data was not signed or verified");
@@ -53,11 +57,8 @@ class Program
    {
       try
       {
-
-
          //byte[] DataToSignByte = ByteConverter.GetBytes(DataToSign);
          byte[] DataToSignByte = Encoding.UTF8.GetBytes(DataToSign);
-
 
          RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
          RSAalg.ImportParameters(PrivateKey);

@@ -10,6 +10,9 @@ using ElectionBlockchain.Model.DataModels;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
+using ElectionBlockchain.Model.DataTrasferObjects;
+using Microsoft.AspNetCore.Http;
+using System.Reflection.Metadata;
 
 namespace ElectionBlockchain.Services.ConcreteServices
 {
@@ -44,14 +47,38 @@ namespace ElectionBlockchain.Services.ConcreteServices
       public async Task CreateAndAddNextBlock()
       {
          List<VoteQueue> votes = DbContext.VotesQueue.Take(4).ToList();
-         //string signature = SignVotesAsync(votes, )
+         string signature = await SignVotesAsync(votes);
 
+         SignedVotesDto signedVotesDto = new SignedVotesDto()
+         {
+            Votes = votes,
+            Signature = signature
+         };
+         string signedVotesDtoString = JsonConvert.SerializeObject(signedVotesDto);
+
+         using (HttpClient client = new HttpClient())
+         {
+            client.BaseAddress = new Uri("https://localhost:44335");
+
+            var content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync("test/votes", content);
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+         }
 
 
       }
-      public Task<bool> CheckVerifierConfirmationAsync(string confirmation)
+      public Task<bool> CheckVerifierConfirmationAsync(SignedVotesDto confirmation)
       {
-         throw new NotImplementedException();
+         var Votes = confirmation.Votes;
+         string Signature = confirmation.Signature;
+
+
+
+         if (VerifySignedVotes(Votes, Signature, PublicPrivateKeyParameter))
+            return Task.FromResult(true);
+         else
+            return Task.FromResult(false);
       }
 
    }

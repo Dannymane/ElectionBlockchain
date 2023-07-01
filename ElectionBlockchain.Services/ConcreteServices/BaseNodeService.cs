@@ -20,7 +20,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
       protected readonly ApplicationDbContext DbContext = null!;
       protected readonly IMapper Mapper = null!;
       public static int NodeId { get; set; } = 0;
-      public static RSAParameters? PublicPrivateKeyParameter { get; set; } = null;
+      public static RSAParameters PublicPrivateKeyParameter { get; set; } = default;
 
       public BaseNodeService(ApplicationDbContext dbContext, IMapper mapper)
       {
@@ -46,8 +46,11 @@ namespace ElectionBlockchain.Services.ConcreteServices
          string? CitizenPublicKey = citizen.PublicKey;
          if (CitizenPublicKey == null) return false;
 
+         RSAParameters PublicKey = JsonConvert.DeserializeObject<RSAParameters>(CitizenPublicKey);
 
-         if (VerifySignedHash(vote.CitizenDocumentId + vote.CandidateId, vote.CitizenSignature, CitizenPublicKey))
+
+
+         if (VerifySignedHash(vote.CitizenDocumentId + vote.CandidateId, vote.CitizenSignature, PublicKey))
             return true;
 
          return false;
@@ -55,19 +58,18 @@ namespace ElectionBlockchain.Services.ConcreteServices
 
       //For data is used Encoding.UTF8 to keep the same data not changed
       //For signature is used Convert.ToBase64String because Encoding.UTF8 can't handle it without changing
-      public async Task<string> SignVotesAsync(List<VoteQueue> voteQueues, string PrivateKeyString)
+      public async Task<string> SignVotesAsync(List<VoteQueue> voteQueues)
       {
          try
          {
             string DataToSign = JsonConvert.SerializeObject(voteQueues);
             RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
-            RSAParameters PrivateKey = JsonConvert.DeserializeObject<RSAParameters>(PrivateKeyString);
-            RSAalg.ImportParameters(PrivateKey);
+            //RSAParameters privateKey = JsonConvert.DeserializeObject<RSAParameters>(PrivateKeyString);
+            RSAalg.ImportParameters(PublicPrivateKeyParameter);
 
             byte[] DataToSignByte = Encoding.UTF8.GetBytes(DataToSign);
 
             string signedData = Convert.ToBase64String(RSAalg.SignData(DataToSignByte, SHA256.Create()));
-
             return signedData;
          }
          catch (CryptographicException e)
@@ -77,7 +79,30 @@ namespace ElectionBlockchain.Services.ConcreteServices
          }
       }
 
-      public bool VerifySignedHash(string DataToVerify, string SignedData, string PublicKeyString)
+      public bool VerifySignedVotes(List<VoteQueue> voteQueues, string SignedData, RSAParameters PublicKey)
+      {
+         try
+         {
+            string DataToVerify = JsonConvert.SerializeObject(voteQueues);
+            byte[] DataToVerifyByte = Encoding.UTF8.GetBytes(DataToVerify);
+            byte[] SignedDataByte = Convert.FromBase64String(SignedData);
+
+            // Create a new instance of RSACryptoServiceProvider using the
+            // key from RSAParameters.
+            RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
+            //RSAParameters PublicKey = JsonConvert.DeserializeObject<RSAParameters>(PublicKeyString);
+            RSAalg.ImportParameters(PublicKey);
+
+
+            return RSAalg.VerifyData(DataToVerifyByte, SHA256.Create(), SignedDataByte);
+         }
+         catch (CryptographicException e)
+         {
+            Console.WriteLine(e.Message);
+            return false;
+         }
+      }
+      public bool VerifySignedHash(string DataToVerify, string SignedData, RSAParameters PublicKey)
       {
          try
          {
@@ -87,7 +112,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
             // Create a new instance of RSACryptoServiceProvider using the
             // key from RSAParameters.
             RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
-            RSAParameters PublicKey = JsonConvert.DeserializeObject<RSAParameters>(PublicKeyString);
+            //RSAParameters PublicKey = JsonConvert.DeserializeObject<RSAParameters>(PublicKeyString);
             RSAalg.ImportParameters(PublicKey);
 
 
