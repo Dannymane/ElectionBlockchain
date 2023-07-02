@@ -4,10 +4,11 @@ How to setup blockchain network
 2) Setup nodes id: GET setup/node/{id} '1'- Verifier1 '2'- Verifier2 '3'- Leader
 3) Generate nodes keys: GET setup/GenerateNodeKeys
 4) Setup nodes private keys: POST setup/node/PrivateKey (for every node)
-5) Get nodes ip: GET setup/node/ip   In docker its enough to know only the ip (without)
-6) Add nodes to nodes' databases: POST database/addnode (Id, IP, PublicKey)
+5) Get nodes ip: GET setup/node/ip   In docker its enough to know only the ip 
+6) Set nodes ip: POST setup/node/{Verifier1 | Verifier2 | Leader}/{ip} (every nove ip for every node) 
+7) Add nodes to nodes' databases: POST database/addnode (Id, IP, PublicKey)
 
-7) Send signed votes to leader: POST /leader/vote
+8) Send signed votes to leader: POST /leader/vote
 
 
 

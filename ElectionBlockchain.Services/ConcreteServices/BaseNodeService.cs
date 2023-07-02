@@ -20,6 +20,9 @@ namespace ElectionBlockchain.Services.ConcreteServices
       protected readonly ApplicationDbContext DbContext = null!;
       protected readonly IMapper Mapper = null!;
       public static int NodeId { get; set; } = 0;
+      public static string LeaderUrl { get; set; } = null!; // http://172.28.190.154:80/
+      public static string Verifier1Url { get; set; } = null!;
+      public static string Verifier2Url { get; set; } = null!;
       public static RSAParameters PublicPrivateKeyParameter { get; set; } = default;
 
       public BaseNodeService(ApplicationDbContext dbContext, IMapper mapper)
@@ -176,6 +179,38 @@ namespace ElectionBlockchain.Services.ConcreteServices
 
          return keysStrings;
 
+      }
+      public async Task SetNodeUrlAsync(string nodeRole, string ip)
+      {
+         switch(nodeRole.ToLower())
+         {
+            case "verifier1":
+               Verifier1Url = $"http://{ip}:80/";
+               break;
+            case "verifier2":
+               Verifier2Url = $"http://{ip}:80/";
+               break;
+            case "leader":
+               LeaderUrl = $"http://{ip}:80/";
+               break;
+            default:
+               break;
+         }
+      }
+
+      public async Task<string> GetNodeUrlAsync(string nodeRole)
+      {
+         switch (nodeRole.ToLower())
+         {
+            case "verifier1":
+               return JsonConvert.SerializeObject(Verifier1Url);
+            case "verifier2":
+               return JsonConvert.SerializeObject(Verifier2Url);
+            case "leader":
+               return JsonConvert.SerializeObject(LeaderUrl);
+            default:
+               return JsonConvert.SerializeObject("Bad node role in ulr");
+         }
       }
 
    }

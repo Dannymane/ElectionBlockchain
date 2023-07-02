@@ -60,5 +60,14 @@ namespace ElectionBlockchain.API.Controllers
          var jsonKeys = await _leaderService.GenerateNodeKeysAsync();
          return Content(jsonKeys, "application/json");
       }
+      [HttpPost("node/{nodeRole}/{ip}")]
+      public async Task<IActionResult> PostSetUrlAsync(string nodeRole, string ip)
+      {
+         
+         await _verifierService.SetNodeUrlAsync(nodeRole, ip);
+
+         var jsonNodeIp = await _verifierService.GetNodeUrlAsync(nodeRole);
+         return Content(jsonNodeIp, "application/json");
+      }
    }
 }

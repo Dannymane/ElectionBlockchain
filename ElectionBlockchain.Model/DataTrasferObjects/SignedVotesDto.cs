@@ -13,3 +13,4 @@ namespace ElectionBlockchain.Model.DataTrasferObjects
       public string Signature { get; set; } = null!;
    }
 }
+ 
