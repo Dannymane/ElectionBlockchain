@@ -34,7 +34,7 @@ namespace ElectionBlockchain.API.Controllers
       }
 
       [HttpGet("node/PrivateKey")]
-      public async Task<IActionResult> GetSetKeyAsync()
+      public async Task<IActionResult> GetKeyAsync()
       {
          var jsonKey = await _leaderService.GetPublicPrivateKeyAsync();
          return Content(jsonKey, "application/json");
@@ -47,7 +47,22 @@ namespace ElectionBlockchain.API.Controllers
          var jsonKey = await _leaderService.GetPublicPrivateKeyAsync();
          return Content(jsonKey, "application/json");
       }
+      //
+      [HttpGet("node/PublicKey/{nodeRole}")]
+      public async Task<IActionResult> GetPublicKeyAsync(string nodeRole)
+      {
+         var jsonKey = await _verifierService.GetPublicKeyAsync(nodeRole);
+         return Content(jsonKey, "application/json");
+      }
 
+      [HttpPost("node/PublicKey/{nodeRole}")]
+      public async Task<IActionResult> PostSetPublicKeyAsync([FromBody] RSAParametersDto publicKey, string nodeRole)
+      {
+         await _verifierService.SetPublicKeyAsync(publicKey, nodeRole);
+         var jsonKey = await _verifierService.GetPublicKeyAsync(nodeRole);
+         return Content(jsonKey, "application/json");
+      }
+      //
       [HttpGet("node/ip")]
       public async Task<IActionResult> GetNodeIpAsync()
       {

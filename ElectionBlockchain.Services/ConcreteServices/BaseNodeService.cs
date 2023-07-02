@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,9 @@ namespace ElectionBlockchain.Services.ConcreteServices
       public static string Verifier1Url { get; set; } = null!;
       public static string Verifier2Url { get; set; } = null!;
       public static RSAParameters PublicPrivateKeyParameter { get; set; } = default;
+      public static RSAParameters LeaderPublicKeyParameter { get; set; } = default;
+      public static RSAParameters Verifier1PublicKeyParameter { get; set; } = default;
+      public static RSAParameters Verifier2PublicKeyParameter { get; set; } = default;
 
       public BaseNodeService(ApplicationDbContext dbContext, IMapper mapper)
       {
@@ -148,6 +152,39 @@ namespace ElectionBlockchain.Services.ConcreteServices
       public async Task<string> GetPublicPrivateKeyAsync()
       {
          return JsonConvert.SerializeObject(PublicPrivateKeyParameter);
+      }
+      public async Task SetPublicKeyAsync(RSAParametersDto publicKeyDto, string nodeRole)
+      {
+         var publicKeyDtoSerialized = JsonConvert.SerializeObject(publicKeyDto);
+         RSAParameters publicKey = JsonConvert.DeserializeObject<RSAParameters>(publicKeyDtoSerialized);
+         switch (nodeRole.ToLower())
+         {
+            case "leader":
+               LeaderPublicKeyParameter = publicKey;
+               break;
+            case "verifier1":
+               Verifier1PublicKeyParameter = publicKey;
+               break;
+            case "verifier2":
+               Verifier2PublicKeyParameter = publicKey;
+               break;
+         }
+         
+      }
+
+      public async Task<string> GetPublicKeyAsync(string nodeRole)
+      {
+         switch (nodeRole.ToLower())
+         {
+            case "leader":
+               return JsonConvert.SerializeObject(LeaderPublicKeyParameter);
+            case "verifier1":
+               return JsonConvert.SerializeObject(Verifier1PublicKeyParameter);
+            case "verifier2":
+               return JsonConvert.SerializeObject(Verifier2PublicKeyParameter);
+            default:
+               return JsonConvert.SerializeObject("Bad node role request"); ;
+         }
       }
 
       public async Task<string> GenerateNodeKeysAsync()
