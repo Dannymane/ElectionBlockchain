@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -248,6 +249,22 @@ namespace ElectionBlockchain.Services.ConcreteServices
             default:
                return JsonConvert.SerializeObject("Bad node role in ulr");
          }
+      }
+
+      public async Task<string> GenerateBlockHash(Block block)
+      {
+         using (SHA256 sha256 = SHA256.Create())
+         {
+            block.Hash = null;
+
+            var serializedLastBlock = JsonConvert.SerializeObject(block);
+            byte[] inputBytes = Encoding.UTF8.GetBytes(serializedLastBlock);
+
+            byte[] hashBytes = sha256.ComputeHash(inputBytes);
+            string hash = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
+            return hash;
+         }
+      }
       }
 
    }
