@@ -13,7 +13,6 @@ namespace ElectionBlockchain.Services.Interfaces
    {
       Task<string> AddVoteQueueToQueueAsync(VoteQueue vote);
       Task CreateAndAddNextBlock();
-      Task<bool> CheckVerifierConfirmationAsync(SignedVotesDto confirmation);
       Task<string> SignVotesAsync(List<VoteQueue> voteQueues); //in BaseNodeService
       Task<bool> VerifyVoteAsync(VoteQueue voteQueue);
       int GetNodeId();

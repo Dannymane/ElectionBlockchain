@@ -12,9 +12,6 @@ namespace ElectionBlockchain.Services.Interfaces
    public interface IVerifierService
    {
       public static int NodeId { get; set; } = 0;
-      Task<bool> VerifyVotesAsync(string requestBodyWithVotes);
-      void SendConfirmationToLeader(string confirmation);
-
       Task<string> SignVotesAsync(List<VoteQueue> voteQueues); //in BaseNodeService
       Task<bool> VerifyVoteAsync(VoteQueue voteQueue); //in BaseNodeService
       int GetNodeId();

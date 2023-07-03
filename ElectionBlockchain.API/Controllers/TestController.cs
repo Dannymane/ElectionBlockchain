@@ -17,14 +17,14 @@ namespace ElectionBlockchain.API.Controllers
          _leaderService = leaderService;
          _verifierService = verifierService;
       }
-      [HttpPost("votes")]
-      public IActionResult PostVotesAsync([FromBody] SignedVotesDto content) 
-      {
+      //[HttpPost("votes")]
+      //public IActionResult PostVotesAsync([FromBody] SignedVotesDto content) 
+      //{
 
-         return Ok(_leaderService.CheckVerifierConfirmationAsync(content));
+      //   return Ok(_leaderService.CheckVerifierConfirmationAsync(content));
             
 
-      }
+      //}
       [HttpGet("CreateBlock")]
       public async Task GetCreateBlockAsync()
       {
