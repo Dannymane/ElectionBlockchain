@@ -11,18 +11,19 @@ namespace ElectionBlockchain.Services.Interfaces
 {
    public interface IVerifierService
    {
-      public static int NodeId { get; set; } = 0;
       Task<string> SignVotesAsync(List<VoteQueue> voteQueues); //in BaseNodeService
       Task<bool> VerifyVoteAsync(VoteQueue voteQueue); //in BaseNodeService
+      Task<string> ReceiveVotesAsync(SignedVotesDto confirmation);
       int GetNodeId();
       void SetNodeId(int id);
       Task SetPublicPrivateKeyAsync(RSAParametersDto publicPrivateKeyString);
-      public Task SetPublicKeyAsync(RSAParametersDto publicKeyDto, string nodeRole);
-      public Task<string> GetPublicKeyAsync(string nodeRole);
+      Task SetPublicKeyAsync(RSAParametersDto publicKeyDto, string nodeRole);
+      Task<string> GetPublicKeyAsync(string nodeRole);
       Task SetNodeUrlAsync(string nodeRole, string ip);
       Task<string> GetNodeUrlAsync(string nodeRole);
       Task<string> GetPublicPrivateKeyAsync();
       Task<string> GenerateNodeKeysAsync();
+
 
 
    }

@@ -16,19 +16,6 @@ namespace ElectionBlockchain.API.Controllers
          _leaderService = leaderService;
       }
 
-      //[HttpGet("node/id")]
-      //public IActionResult GetNodeId()
-      //{
-      //   return Ok(_leaderService.GetNodeId());
-      //}
-
-      //[HttpPost("node/{id}")]
-      //public IActionResult PostNodeId(int id)
-      //{
-      //   _leaderService.SetNodeId(id);
-      //   return Ok(_leaderService.GetNodeId());
-      //}
-
       [HttpPost("vote")]
       public async Task<IActionResult> PostVoteAsync([FromBody] VoteQueue vote)
       {

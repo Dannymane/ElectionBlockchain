@@ -18,16 +18,25 @@ namespace ElectionBlockchain.Services.ConcreteServices
          : base(dbContext, mapper)
       {
       }
-      public async Task<StringContent> ReceiveVotes(SignedVotesDto confirmation)
+      public async Task<string> ReceiveVotesAsync(SignedVotesDto confirmation)
       {
          var votesQueue = confirmation.Votes;
          string LSignature = confirmation.LSignature;
 
-         string signedVotesDtoString = JsonConvert.SerializeObject(confirmation);
-         StringContent content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
+         string content = JsonConvert.SerializeObject(confirmation);
+         //StringContent content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
 
+         //signature verification
          if (!VerifySignedVotes(votesQueue, LSignature, LeaderPublicKeyParameter))
             return content;
+
+         //votes verification
+         foreach(var vote in votesQueue)
+         {
+            if (!await VerifyVoteAsync(vote))
+               return content;
+         }
+
 
          if (VerifySignedVotes(votesQueue, confirmation.V1Signature, Verifier1PublicKeyParameter) &&
                VerifySignedVotes(votesQueue, confirmation.V2Signature, Verifier2PublicKeyParameter))
@@ -44,8 +53,8 @@ namespace ElectionBlockchain.Services.ConcreteServices
          if(NodeId == 2)
             confirmation.V2Signature = Signature;
 
-         signedVotesDtoString = JsonConvert.SerializeObject(confirmation);
-         content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
+         content = JsonConvert.SerializeObject(confirmation);
+         //content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
 
          return content;
 
