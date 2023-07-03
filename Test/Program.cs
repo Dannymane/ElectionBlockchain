@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ElectionBlockchain.Model.DataModels;
+using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -7,6 +8,31 @@ class Program
 {
    static void Main()
    {
+      // Create a SHA256 hash
+      using (SHA256 sha256 = SHA256.Create())
+      {
+         Block lastBlock = new Block()
+         {
+            Id = 0,
+            Votes = null,
+            LeaderSignature = null,
+            FirstVerifierSignature = null,
+            SecondVerifierSignature = null,
+            Hash = null,
+            PreviousBlockHash = "0246051F5B47D3CDAFF1A58FE4C3DE589D6DCEFDC3AA8CF8EF0B110A2D7F41D4"
+
+         };
+         var serializedLastBlock = JsonConvert.SerializeObject(lastBlock);
+         byte[] inputBytes = Encoding.UTF8.GetBytes(serializedLastBlock);
+         //byte[] inputBytes = Convert.FromBase64String("YourDataToHash");
+         Console.WriteLine($"Input: {serializedLastBlock}");
+
+         byte[] hashBytes = sha256.ComputeHash(inputBytes);
+         Console.WriteLine("hashBytes: " + hashBytes); //System.Byte[]
+         string hash = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
+         Console.WriteLine("hash: " + hash); //9B5082EC0D19AF5D70881543D0D0CF5F09119448ED99194FE075970824A9C23A
+      }
+
       try
       {
          // Create a UnicodeEncoder to convert between byte array and string.

@@ -87,10 +87,12 @@ namespace ElectionBlockchain.Services.ConcreteServices
          }
       }
 
-      public bool VerifySignedVotes(List<VoteQueue> voteQueues, string SignedData, RSAParameters PublicKey)
+      public bool VerifySignedVotes(List<VoteQueue> voteQueues, string? SignedData, RSAParameters PublicKey)
       {
          try
          {
+            if (SignedData == null) return false;
+
             string DataToVerify = JsonConvert.SerializeObject(voteQueues);
             byte[] DataToVerifyByte = Encoding.UTF8.GetBytes(DataToVerify);
             byte[] SignedDataByte = Convert.FromBase64String(SignedData);
@@ -265,6 +267,56 @@ namespace ElectionBlockchain.Services.ConcreteServices
             return hash;
          }
       }
+      public async Task AddBlockToDatabase(SignedVotesDto signedVotesDto)
+      {
+         var votes = signedVotesDto.Votes.Select(voteQueue => Mapper.Map<Vote>(voteQueue)).ToList();
+         Block? lastBlock = await DbContext.Blocks.OrderByDescending(b => b.Id).FirstOrDefaultAsync();
+         if (lastBlock == null)
+         {
+            lastBlock = new Block()
+            {
+               Id = 0,
+               Votes = null,
+               LeaderSignature = null,
+               FirstVerifierSignature = null,
+               SecondVerifierSignature = null,
+               Hash = "0F7382E7F78F4B3199547ECEBCCD348B88D49F018CE766AE626EA00A9C4B73D5",
+               PreviousBlockHash = "0246051F5B47D3CDAFF1A58FE4C3DE589D6DCEFDC3AA8CF8EF0B110A2D7F41D4"
+               /* PreviousBlockHash generated from
+                * Id = -1,
+                  Votes = null,
+                  LeaderSignature = null,
+                  FirstVerifierSignature = null,
+                  SecondVerifierSignature = null,
+                  Hash = null,
+                  PreviousBlockHash = null
+                */
+            };
+         }
+
+
+         foreach (var v in votes)
+         {
+            v.BlockId = lastBlock.Id + 1;
+         }
+
+         Block block = new Block()
+         {
+            Votes = votes,
+            LeaderSignature = signedVotesDto.LSignature,
+            FirstVerifierSignature = signedVotesDto.V1Signature,
+            SecondVerifierSignature = signedVotesDto.V2Signature,
+            PreviousBlockHash = lastBlock.Hash,
+            Hash = null
+         };
+
+         string hash = await GenerateBlockHash(block);
+         block.Hash = hash;
+
+
+         await DbContext.Blocks.AddAsync(block);
+         DbContext.VotesQueue.RemoveRange(signedVotesDto.Votes);
+         await DbContext.SaveChangesAsync();
       }
 
    }
