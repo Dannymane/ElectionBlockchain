@@ -13,11 +13,13 @@ using System.Security.Cryptography;
 using ElectionBlockchain.Model.DataTrasferObjects;
 using Microsoft.AspNetCore.Http;
 using System.Reflection.Metadata;
+using System.Net.Http.Json;
 
 namespace ElectionBlockchain.Services.ConcreteServices
 {
    public class LeaderService : BaseNodeService, ILeaderService
    {
+
       public LeaderService(ApplicationDbContext dbContext, IMapper mapper)
          : base(dbContext, mapper)
       {
@@ -46,40 +48,72 @@ namespace ElectionBlockchain.Services.ConcreteServices
       }
       public async Task CreateAndAddNextBlock()
       {
-         List<VoteQueue> votes = DbContext.VotesQueue.Take(4).ToList();
-         string signature = await SignVotesAsync(votes);
+         List<VoteQueue> votesQueue = DbContext.VotesQueue.Take(4).ToList();
+         string LSignature = await SignVotesAsync(votesQueue);
 
          SignedVotesDto signedVotesDto = new SignedVotesDto()
          {
-            Votes = votes,
-            Signature = signature
+            Votes = votesQueue,
+            LSignature = LSignature,
+            V1Signature = null,
+            V2Signature = null
          };
-         string signedVotesDtoString = JsonConvert.SerializeObject(signedVotesDto);
+         //asynchronous sending to verifiers
+         var signedVotesDtoV1 = SendVotesToVerifier(signedVotesDto, Verifier1Url);
+         var signedVotesDtoV2 = SendVotesToVerifier(signedVotesDto, Verifier2Url);
 
-         using (HttpClient client = new HttpClient())
+         string? V1Signature = (await signedVotesDtoV1).V1Signature;
+         if (!VerifySignedVotes(signedVotesDto.Votes, V1Signature, Verifier1PublicKeyParameter))
          {
-            client.BaseAddress = new Uri("https://localhost:44335");
-
-            var content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("test/votes", content);
-
-            string responseBody = await response.Content.ReadAsStringAsync();
+            await Task.Delay(1000);
+            await CreateAndAddNextBlock(); //start assebmling again
+            return;
          }
 
+         string? V2Signature = (await signedVotesDtoV2).V2Signature;
+         if (!VerifySignedVotes(signedVotesDto.Votes, V2Signature, Verifier2PublicKeyParameter))
+         {
+            await Task.Delay(1000);
+            await CreateAndAddNextBlock(); //start assebmling again
+            return;
+         }
 
-      }
-      public Task<bool> CheckVerifierConfirmationAsync(SignedVotesDto confirmation)
-      {
-         var Votes = confirmation.Votes;
-         string Signature = confirmation.Signature;
+         signedVotesDto.V1Signature = V1Signature;
+         signedVotesDto.V2Signature = V2Signature;
 
+         var signedVotesDtoV1Confirmation = SendVotesToVerifier(signedVotesDto, Verifier1Url);
+         var signedVotesDtoV2Confirmation = SendVotesToVerifier(signedVotesDto, Verifier2Url);
 
-
-         if (VerifySignedVotes(Votes, Signature, PublicPrivateKeyParameter))
-            return Task.FromResult(true);
+         if ((await signedVotesDtoV1Confirmation == signedVotesDto) && (await signedVotesDtoV2Confirmation == signedVotesDto))
+         {
+            await AddBlockToDatabaseAsync(signedVotesDto);
+         }
          else
-            return Task.FromResult(false);
+         {
+            await Task.Delay(1000);
+            await CreateAndAddNextBlock(); //start assebmling again
+            return;
+         }
       }
+
+      public async Task<SignedVotesDto> SendVotesToVerifier(SignedVotesDto signedVotesDto, string verifierUrl)
+      {
+         using (HttpClient client = new HttpClient())
+         {
+            client.BaseAddress = new Uri(verifierUrl);
+
+            string signedVotesDtoString = JsonConvert.SerializeObject(signedVotesDto);
+            var content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync("verifier/VotesFromLeader", content);
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            SignedVotesDto? r = JsonConvert.DeserializeObject<SignedVotesDto>(responseBody);
+            return r ?? signedVotesDto;
+         }
+      }
+
+
 
    }
 }

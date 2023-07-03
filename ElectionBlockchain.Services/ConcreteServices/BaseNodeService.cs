@@ -267,7 +267,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
             return hash;
          }
       }
-      public async Task AddBlockToDatabase(SignedVotesDto signedVotesDto)
+      public async Task AddBlockToDatabaseAsync(SignedVotesDto signedVotesDto)
       {
          var votes = signedVotesDto.Votes.Select(voteQueue => Mapper.Map<Vote>(voteQueue)).ToList();
          Block? lastBlock = await DbContext.Blocks.OrderByDescending(b => b.Id).FirstOrDefaultAsync();
@@ -315,7 +315,9 @@ namespace ElectionBlockchain.Services.ConcreteServices
 
 
          await DbContext.Blocks.AddAsync(block);
-         DbContext.VotesQueue.RemoveRange(signedVotesDto.Votes);
+         if(NodeId == 3)
+            DbContext.VotesQueue.RemoveRange(signedVotesDto.Votes);  
+
          await DbContext.SaveChangesAsync();
       }
 

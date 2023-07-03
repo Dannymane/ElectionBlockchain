@@ -18,17 +18,38 @@ namespace ElectionBlockchain.Services.ConcreteServices
          : base(dbContext, mapper)
       {
       }
-
-      public void SendConfirmationToLeader(string confirmation)
+      public async Task<StringContent> ReceiveVotes(SignedVotesDto confirmation)
       {
-         throw new NotImplementedException();
-      }
+         var votesQueue = confirmation.Votes;
+         string LSignature = confirmation.LSignature;
 
-      public Task<bool> VerifyVotesAsync(string requestBodyWithVotes)
-      {
-         throw new NotImplementedException();
-      }
+         string signedVotesDtoString = JsonConvert.SerializeObject(confirmation);
+         StringContent content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
 
+         if (!VerifySignedVotes(votesQueue, LSignature, LeaderPublicKeyParameter))
+            return content;
+
+         if (VerifySignedVotes(votesQueue, confirmation.V1Signature, Verifier1PublicKeyParameter) &&
+               VerifySignedVotes(votesQueue, confirmation.V2Signature, Verifier2PublicKeyParameter))
+         {
+            await AddBlockToDatabaseAsync(confirmation);
+            return content;
+         }
+
+         string Signature = await SignVotesAsync(votesQueue);
+
+         if(NodeId == 1) 
+            confirmation.V1Signature = Signature;
+
+         if(NodeId == 2)
+            confirmation.V2Signature = Signature;
+
+         signedVotesDtoString = JsonConvert.SerializeObject(confirmation);
+         content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
+
+         return content;
+
+      }
 
    }
 }
