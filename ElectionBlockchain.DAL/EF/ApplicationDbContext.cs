@@ -1,5 +1,7 @@
 ﻿using ElectionBlockchain.Model.DataModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection.Emit;
@@ -18,7 +20,23 @@ public class ApplicationDbContext : DbContext
    public virtual DbSet<CitizenPrivateKey> CitizenPrivateKeys { get; set; } //the real app shouldn't store private keys in the database
    //CitizenPrivateKeys only for future testing and for the comfort of code presentation
    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-   : base(options) { }
+   : base(options) 
+   {
+      try
+      {
+         var databaseCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+         if(databaseCreator != null)
+         {
+            if (!databaseCreator.CanConnect()) databaseCreator.Create();
+            if (databaseCreator.HasTables()) databaseCreator.CreateTables();
+
+         }
+      }catch (Exception ex)
+      {
+         Console.WriteLine(ex.Message);
+      }
+
+   }
    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
    {
       base.OnConfiguring(optionsBuilder);

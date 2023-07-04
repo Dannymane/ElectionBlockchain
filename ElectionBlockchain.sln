@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElectionBlockchain.Model", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElectionBlockchain.DAL", "ElectionBlockchain.DAL\ElectionBlockchain.DAL.csproj", "{F509A5B6-F1A6-44E6-B921-B7C7889B7253}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{22F4228E-F28C-4E96-931C-6D45E72217E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{22F4228E-F28C-4E96-931C-6D45E72217E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1ECDAB1D-A085-4516-B4DF-DDA73849FCF2}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F25A242A-B1EE-4C2A-9CF0-210186A4102F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{22F4228E-F28C-4E96-931C-6D45E72217E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22F4228E-F28C-4E96-931C-6D45E72217E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22F4228E-F28C-4E96-931C-6D45E72217E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F25A242A-B1EE-4C2A-9CF0-210186A4102F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25A242A-B1EE-4C2A-9CF0-210186A4102F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25A242A-B1EE-4C2A-9CF0-210186A4102F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25A242A-B1EE-4C2A-9CF0-210186A4102F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

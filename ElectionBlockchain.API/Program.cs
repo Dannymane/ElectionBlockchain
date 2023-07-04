@@ -16,9 +16,15 @@ builder.Services.AddSwaggerGen();
 
 
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User Id=sa;Password={dbPassword}";
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connectionString));
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddScoped<IDatabaseService, DatabaseService>();
 builder.Services.AddScoped<ILeaderService, LeaderService>();
@@ -30,11 +36,13 @@ builder.Services.AddControllers();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-   app.UseSwagger();
-   app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//   app.UseSwagger();
+//   app.UseSwaggerUI();
+//}
+app.UseSwagger(); //
+app.UseSwaggerUI();//
 
 app.UseHttpsRedirection();
 
