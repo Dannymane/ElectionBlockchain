@@ -25,13 +25,14 @@ public class ApplicationDbContext : DbContext
       try
       {
          var databaseCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
-         if(databaseCreator != null)
+         if (databaseCreator != null)
          {
             if (!databaseCreator.CanConnect()) databaseCreator.Create();
-            if (databaseCreator.HasTables()) databaseCreator.CreateTables();
+            if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
 
          }
-      }catch (Exception ex)
+      }
+      catch (Exception ex)
       {
          Console.WriteLine(ex.Message);
       }

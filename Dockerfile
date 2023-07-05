@@ -29,3 +29,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "ElectionBlockchain.API.dll"]
+
+ENV DB_IP="127.0.0.1"
