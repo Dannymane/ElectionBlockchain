@@ -64,7 +64,7 @@ namespace ElectionBlockchain.API.Controllers
          return Content(jsonString, "application/json");
       }
 
-      [HttpPost("database/WriteCitizens")]
+      [HttpPost("WriteCitizens")]
       public async Task<IActionResult> PostWriteCitizens([FromBody] List<Citizen> citizens)
       {
          await _databaseService.WriteCitizensToDatabase(citizens);

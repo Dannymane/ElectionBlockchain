@@ -14,10 +14,10 @@ builder.Services.AddAutoMapper(typeof(MainProfile));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var dbIp = Environment.GetEnvironmentVariable("DB_IP");
-var connectionString = $"Server={dbIp},1433;Database=BlockchainDb;User ID=SA;Password=Admin123;encrypt=true;trustServerCertificate=true;";
+//var dbIp = Environment.GetEnvironmentVariable("DB_IP");
+//var connectionString = $"Server={dbIp},1433;Database=BlockchainDb;User ID=SA;Password=Admin123;encrypt=true;trustServerCertificate=true;";
 
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 //var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
 //var dbName = Environment.GetEnvironmentVariable("DB_NAME");

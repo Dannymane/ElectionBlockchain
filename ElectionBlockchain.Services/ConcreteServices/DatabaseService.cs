@@ -2,6 +2,7 @@
 using ElectionBlockchain.Model.DataModels;
 using ElectionBlockchain.Model.DataTrasferObjects;
 using ElectionBlockchain.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -17,7 +18,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ElectionBlockchain.Services.ConcreteServices
 {
-   public class DatabaseService : IDatabaseService
+   public class DatabaseService : ControllerBase, IDatabaseService 
    {
       protected readonly ApplicationDbContext DbContext = null!;
       public DatabaseService(ApplicationDbContext dbContext)
