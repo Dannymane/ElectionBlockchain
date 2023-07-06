@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ElectionBlockchain.Model.DataModels;
+using ElectionBlockchain.Model.DataTrasferObjects;
 using ElectionBlockchain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,6 @@ namespace ElectionBlockchain.Services.ConcreteServices
    public class DatabaseService : IDatabaseService
    {
       protected readonly ApplicationDbContext DbContext = null!;
-
       public DatabaseService(ApplicationDbContext dbContext)
       {
          DbContext = dbContext;
@@ -71,7 +71,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
          return "Table not found";
       }
 
-      public string ResetCitizensAndRelatedTables()
+      public string ResetCitizensAndRelatedTables() //returns signed votes (vote for candidate 1 and vote for candidate 2)
       {
          Clean("blocks");
          Clean("votes");
@@ -83,8 +83,8 @@ namespace ElectionBlockchain.Services.ConcreteServices
          Citizen citizen;
          CitizenPrivateKey citizenPrivateKey;
          VoteQueue vote;
-         int CandidateId;
-         string signedVote;
+         int CandidateId1, CandidateId2;
+         string signedVote1, signedVote2;
          //every time it runs, it generates different keys
          for (int i = 10; i < 22; i++)
          {
@@ -103,6 +103,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
             };
             DbContext.Citizens.Add(citizen);
 
+            
             citizenPrivateKey = new CitizenPrivateKey()
             {
                DocumentId = citizen.DocumentId,
@@ -110,21 +111,72 @@ namespace ElectionBlockchain.Services.ConcreteServices
             };
             DbContext.CitizenPrivateKeys.Add(citizenPrivateKey);
 
-            CandidateId = new Random().Next(1, 3);//1 or 2
+            CandidateId1 = 1;
+            CandidateId2 = 2;
+
             //must be Encoding.UTF8.GetBytes to do not change the data
-            byte[] DataToSignByte = Encoding.UTF8.GetBytes(citizen.DocumentId+CandidateId.ToString()); 
-            signedVote = Convert.ToBase64String(RSAalg.SignData(DataToSignByte, SHA256.Create())); //must be Convert.ToBase64String
+            byte[] DataToSignByte1 = Encoding.UTF8.GetBytes(citizen.DocumentId+CandidateId1.ToString()); 
+            signedVote1 = Convert.ToBase64String(RSAalg.SignData(DataToSignByte1, SHA256.Create())); //must be Convert.ToBase64String
+
+            byte[] DataToSignByte2 = Encoding.UTF8.GetBytes(citizen.DocumentId + CandidateId2.ToString());
+            signedVote2 = Convert.ToBase64String(RSAalg.SignData(DataToSignByte2, SHA256.Create()));
 
             vote = new VoteQueue()
             {
                CitizenDocumentId = citizen.DocumentId,
-               CandidateId = CandidateId,
-               CitizenSignature = signedVote
+               CandidateId = CandidateId1,
+               CitizenSignature = signedVote1
+            };
+            voteQueueList.Add(vote);
+
+            vote = new VoteQueue()
+            {
+               CitizenDocumentId = citizen.DocumentId,
+               CandidateId = CandidateId2,
+               CitizenSignature = signedVote2
             };
             voteQueueList.Add(vote);
          }
          DbContext.SaveChanges();
          return JsonSerializer.Serialize<IList<VoteQueue>>(voteQueueList);
+
+      }
+
+      public async Task<string> WriteCitizensToNode(string nodeIp)
+      {
+         using (HttpClient client = new HttpClient())
+         {
+            client.BaseAddress = new Uri($"http://{nodeIp}:80/");
+            var citizensEntities = DbContext.Citizens.ToList();
+            string citizensString = JsonConvert.SerializeObject(citizensEntities);
+            var content = new StringContent(citizensString, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync("database/WriteCitizens", content);
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+         }
+      }
+
+      public async Task WriteCitizensToDatabase(IEnumerable<Citizen> citizens)
+      {
+         Clean("blocks");
+         Clean("votes");
+         Clean("votesqueue");
+         Clean("citizens");
+
+         foreach (var citizen in citizens)
+         {
+            DbContext.Citizens.Add(citizen);
+         }
+         await DbContext.SaveChangesAsync();
+      }
+
+      public async Task AddCandidatesAsync(IEnumerable<Candidate> candidates)
+      {
+         foreach (var candidate in candidates)
+         {
+            DbContext.Candidates.Add(candidate);
+         }
+         await DbContext.SaveChangesAsync();
       }
    }
 }

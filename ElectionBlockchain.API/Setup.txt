@@ -1,14 +1,18 @@
 How to setup blockchain network
 
 
-2) Setup nodes id: GET setup/node/{id} '1'- Verifier1 '2'- Verifier2 '3'- Leader
-3) Generate nodes keys: GET setup/GenerateNodeKeys
-4) Setup nodes private keys: POST setup/node/PrivateKey (for every node)
-5) Setup nodes public keys: POST setup/node/PublicKey/{Verifier1 | Verifier2 | Leader} (for every node)
-5) Get nodes ip: GET setup/node/ip   In docker its enough to know only the ip 
-6) Set nodes ip: POST setup/node/{Verifier1 | Verifier2 | Leader}/{ip} (every node ip for every node
-1) Reset citizens (on leader, he will send citizens to another nodes), save generated signed votes (the citizens' decisions are random)
-7) Add nodes to nodes' databases: POST database/addnode (Id, IP, PublicKey)
+
+1) Reset citizens on leader GET database/resetCitizensAndRelatedTables
+and send citizens to another nodes POST database/sendCitizens/{ip} from leader
+2) Add candidates to every node POST database/addCandidates with body of candidates (Name, Surname)
+3) Setup nodes id: GET setup/node/{id} '1'- Verifier1 '2'- Verifier2 '3'- Leader
+4) Generate nodes keys: GET setup/GenerateNodeKeys
+5) Setup nodes private keys: POST setup/node/PrivateKey (for every node)
+6) Setup nodes public keys: POST setup/node/PublicKey/{Verifier1 | Verifier2 | Leader} (for every node)
+7) Get nodes ip: GET setup/node/ip   In docker its enough to know only the ip 
+8) Set nodes ip: POST setup/node/{Verifier1 | Verifier2 | Leader}/{ip} (every node ip for every node
+9) Reset citizens (on leader, he will send citizens to another nodes), save generated signed votes (the citizens' decisions are random)
+10) Add nodes to nodes' databases: POST database/addnode (Id, IP, PublicKey)
 
 8) Send signed votes to leader: POST /leader/vote
 

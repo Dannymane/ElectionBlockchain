@@ -18,7 +18,7 @@ namespace ElectionBlockchain.API.Controllers
       }
       //3 nodes will be added in a special order, 1- Verifier1 2- Verifier2 3- Leader
       [HttpPost("addnode")]
-      public async Task<IActionResult> AddNodeASync([FromBody] Node node)
+      public async Task<IActionResult> AddNodeAsync([FromBody] Node node)
       {
          Node n = await _databaseService.AddNodeAsync(node);
          if (n == null)
@@ -26,7 +26,14 @@ namespace ElectionBlockchain.API.Controllers
 
          return Ok(n);
       }
+      [HttpPost("addCandidates")]
+      public async Task<IActionResult> AddCandidateAsync([FromBody] IEnumerable<Candidate> candidates)
+      {
 
+         await _databaseService.AddCandidatesAsync(candidates);
+
+         return await GetTableAsync("candidates");
+      }
 
       [HttpDelete("tables/{table}")]
       public IActionResult Clean(string table)
@@ -50,8 +57,19 @@ namespace ElectionBlockchain.API.Controllers
          return Content(jsonString, "application/json");
       }
 
+      [HttpPost("sendCitizens/{ip}")]
+      public async Task<IActionResult> PostSendCitizens(string ip)
+      {
+         string jsonString = await _databaseService.WriteCitizensToNode(ip);
+         return Content(jsonString, "application/json");
+      }
 
-
+      [HttpPost("database/WriteCitizens")]
+      public async Task<IActionResult> PostWriteCitizens([FromBody] List<Citizen> citizens)
+      {
+         await _databaseService.WriteCitizensToDatabase(citizens);
+         return await GetTableAsync("citizens");
+      }
 
    }
 }

@@ -14,5 +14,9 @@ namespace ElectionBlockchain.Services.Interfaces
       int Clean(string table);
       Task<string> GetTableAsync(string table);
       string ResetCitizensAndRelatedTables();
+      public Task<string> WriteCitizensToNode(string nodeIp);
+      public Task WriteCitizensToDatabase(IEnumerable<Citizen> citizens);
+      public Task AddCandidatesAsync(IEnumerable<Candidate> candidates);
+
    }
 }
