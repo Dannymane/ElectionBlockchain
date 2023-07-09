@@ -39,8 +39,8 @@ namespace ElectionBlockchain.Services.ConcreteServices
 
       public async Task<bool> VerifyVoteAsync(VoteQueue vote)
       {
-         if (await DbContext.VotesQueue.FirstOrDefaultAsync(v => v.CitizenDocumentId == vote.CitizenDocumentId) != null)//for classes default is null
-            return false;
+         //if (await DbContext.VotesQueue.FirstOrDefaultAsync(v => v.CitizenDocumentId == vote.CitizenDocumentId) != null)//for classes default is null
+         //   return false;
 
          var candidate = await DbContext.Candidates.FirstOrDefaultAsync(c => c.Id == vote.CandidateId);
          if (candidate == null)

@@ -113,7 +113,8 @@ namespace ElectionBlockchain.Services.ConcreteServices
       {
          using (HttpClient client = new HttpClient())
          {
-            client.BaseAddress = new Uri(verifierUrl);
+            //client.BaseAddress = new Uri(verifierUrl);
+            client.BaseAddress = new Uri("https://localhost:44335/");
 
             string signedVotesDtoString = JsonConvert.SerializeObject(signedVotesDto);
             var content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");

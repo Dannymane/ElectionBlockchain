@@ -41,17 +41,20 @@ namespace ElectionBlockchain.Services.ConcreteServices
          if (VerifySignedVotes(votesQueue, confirmation.V1Signature, Verifier1PublicKeyParameter) &&
                VerifySignedVotes(votesQueue, confirmation.V2Signature, Verifier2PublicKeyParameter))
          {
-            await AddBlockToDatabaseAsync(confirmation);
+            //await AddBlockToDatabaseAsync(confirmation); 
             return content;
          }
 
          string Signature = await SignVotesAsync(votesQueue);
+         //test
+         confirmation.V1Signature = Signature;
+         confirmation.V2Signature = Signature;
+         //test
+         //if (NodeId == 1) 
+         //   confirmation.V1Signature = Signature;
 
-         if(NodeId == 1) 
-            confirmation.V1Signature = Signature;
-
-         if(NodeId == 2)
-            confirmation.V2Signature = Signature;
+         //if(NodeId == 2)
+         //   confirmation.V2Signature = Signature;
 
          content = JsonConvert.SerializeObject(confirmation);
          //content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
