@@ -23,7 +23,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
          var votesQueue = confirmation.Votes;
          string LSignature = confirmation.LSignature;
 
-         string content = JsonConvert.SerializeObject(confirmation);
+         var content = JsonConvert.SerializeObject(confirmation);
          //StringContent content = new StringContent(signedVotesDtoString, Encoding.UTF8, "application/json");
 
          //signature verification

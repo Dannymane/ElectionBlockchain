@@ -2,7 +2,6 @@
 using ElectionBlockchain.Model.DataModels;
 using ElectionBlockchain.Model.DataTrasferObjects;
 using ElectionBlockchain.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -12,13 +11,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ElectionBlockchain.Services.ConcreteServices
 {
-   public class DatabaseService : ControllerBase, IDatabaseService 
+   public class DatabaseService : IDatabaseService
    {
       protected readonly ApplicationDbContext DbContext = null!;
       public DatabaseService(ApplicationDbContext dbContext)
@@ -54,19 +51,19 @@ namespace ElectionBlockchain.Services.ConcreteServices
          switch (table)
          {
             case "nodes":
-               return JsonSerializer.Serialize<IList<Node>>(await DbContext.Nodes.ToListAsync());
+               return JsonConvert.SerializeObject(await DbContext.Nodes.ToListAsync());
             case "blocks":
-               return JsonSerializer.Serialize<IList<Block>>(await DbContext.Blocks.ToListAsync());
+               return JsonConvert.SerializeObject(await DbContext.Blocks.ToListAsync());
             case "citizens":
-               return JsonSerializer.Serialize<IList<Citizen>>(await DbContext.Citizens.ToListAsync());
+               return JsonConvert.SerializeObject(await DbContext.Citizens.ToListAsync());
             case "votes":
-               return JsonSerializer.Serialize<IList<Vote>>(await DbContext.Votes.ToListAsync());
+               return JsonConvert.SerializeObject(await DbContext.Votes.ToListAsync());
             case "votesqueue":
-               return JsonSerializer.Serialize<IList<VoteQueue>>(await DbContext.VotesQueue.ToListAsync());
+               return JsonConvert.SerializeObject(await DbContext.VotesQueue.ToListAsync());
             case "candidates":
-               return JsonSerializer.Serialize<IList<Candidate>>(await DbContext.Candidates.ToListAsync());
+               return JsonConvert.SerializeObject(await DbContext.Candidates.ToListAsync());
             case "citizenprivatekeys":
-               return JsonSerializer.Serialize<IList<CitizenPrivateKey>>(await DbContext.CitizenPrivateKeys.ToListAsync());
+               return JsonConvert.SerializeObject(await DbContext.CitizenPrivateKeys.ToListAsync());
          }
 
          return "Table not found";
@@ -139,7 +136,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
             voteQueueList.Add(vote);
          }
          DbContext.SaveChanges();
-         return JsonSerializer.Serialize<IList<VoteQueue>>(voteQueueList);
+         return JsonConvert.SerializeObject(voteQueueList);
 
       }
 
