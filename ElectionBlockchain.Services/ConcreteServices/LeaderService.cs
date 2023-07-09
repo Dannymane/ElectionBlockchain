@@ -48,10 +48,13 @@ namespace ElectionBlockchain.Services.ConcreteServices
       }
       public async Task CreateAndAddNextBlock()
       {
-         List<VoteQueue> votesQueue = DbContext.VotesQueue.Take(4).ToList();
+         List<VoteQueue> votesQueue = await DbContext.VotesQueue.Take(4).ToListAsync();
+
+         if (votesQueue == null) return;
+
          string LSignature = await SignVotesAsync(votesQueue);
 
-         SignedVotesDto signedVotesDto = new SignedVotesDto()
+         SignedVotesDto? signedVotesDto = new SignedVotesDto()
          {
             Votes = votesQueue,
             LSignature = LSignature,
@@ -84,9 +87,19 @@ namespace ElectionBlockchain.Services.ConcreteServices
          var signedVotesDtoV1Confirmation = SendVotesToVerifier(signedVotesDto, Verifier1Url);
          var signedVotesDtoV2Confirmation = SendVotesToVerifier(signedVotesDto, Verifier2Url);
 
-         if ((await signedVotesDtoV1Confirmation == signedVotesDto) && (await signedVotesDtoV2Confirmation == signedVotesDto))
+         var signedVotesDtoV1ConfirmationResult = await signedVotesDtoV1Confirmation;
+         var signedVotesDtoV2ConfirmationResult = await signedVotesDtoV2Confirmation;
+
+         //For comparing 
+         string LSignedVotesString = JsonConvert.SerializeObject(signedVotesDto);
+         string V1SignedVotesString = JsonConvert.SerializeObject(signedVotesDtoV1ConfirmationResult);
+         string V2SignedVotesString = JsonConvert.SerializeObject(signedVotesDtoV2ConfirmationResult);
+    
+         if ((LSignedVotesString == V1SignedVotesString) && (LSignedVotesString == V2SignedVotesString))
          {
             await AddBlockToDatabaseAsync(signedVotesDto);
+            DbContext.VotesQueue.RemoveRange(votesQueue);
+            await DbContext.SaveChangesAsync();
          }
          else
          {

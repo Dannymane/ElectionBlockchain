@@ -49,7 +49,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
          var citizen = await DbContext.Citizens.FirstOrDefaultAsync(c => c.DocumentId == vote.CitizenDocumentId);
          if(citizen == null) return false;
 
-         if (citizen.VoteId != null) return false;
+         if (citizen.Vote != null) return false;
 
          string? CitizenPublicKey = citizen.PublicKey;
          if (CitizenPublicKey == null) return false;
