@@ -47,7 +47,7 @@ namespace ElectionBlockchain.Services.ConcreteServices
       public async Task<string> GetTableAsync(string table)
       {
          table = table.ToLower();
-         //that is sad that EF Core does not support smth like DbContext.Database.SqlQuery<string>($"SELECT * FROM {table}").ToList();
+         //this is sad that EF Core does not support smth like DbContext.Database.SqlQuery<string>($"SELECT * FROM {table}").ToList();
          switch (table)
          {
             case "nodes":

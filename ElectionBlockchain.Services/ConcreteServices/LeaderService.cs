@@ -35,8 +35,9 @@ namespace ElectionBlockchain.Services.ConcreteServices
                await DbContext.SaveChangesAsync();
                
                int countVotes = await DbContext.VotesQueue.CountAsync();
-               if (countVotes >= 4)
-                  CreateAndAddNextBlock();
+               //here you can choose any size of block (countVotes >= size)
+               if (countVotes >= 4) 
+                  await CreateAndAddNextBlock();
 
                return "The vote is verified and added to queue";
             }

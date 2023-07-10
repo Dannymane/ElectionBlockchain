@@ -208,15 +208,6 @@ namespace ElectionBlockchain.Services.ConcreteServices
 
          var keysStrings = JsonConvert.SerializeObject(keysParameters);
 
-         //string PublicKey1 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
-         //string PrivateKey1 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
-         //string PublicKey2 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
-         //string PrivateKey2 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
-         //string PublicKey3 = JsonConvert.SerializeObject(RSAalg.ExportParameters(false));
-         //string PrivateKey3 = JsonConvert.SerializeObject(RSAalg.ExportParameters(true));
-         
-         //var keys = new List<string> { PublicKey1, PrivateKey1, PublicKey2, PrivateKey2, PublicKey3, PrivateKey3 };
-
          return keysStrings;
 
       }
@@ -295,10 +286,10 @@ namespace ElectionBlockchain.Services.ConcreteServices
          }
 
 
-         foreach (var v in votes)
-         {
-            v.BlockId = lastBlock.Id + 1;
-         }
+         // foreach (var v in votes)
+         // {
+         //    v.BlockId = lastBlock.Id + 1;
+         // }
 
          Block block = new Block()
          {
