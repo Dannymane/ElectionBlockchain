@@ -1,0 +1,1379 @@
+{
+	"info": {
+		"_postman_id": "7cac741e-9fe0-4988-a650-e4048b2c8c19",
+		"name": "ElectionBlockchain",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27117594"
+	},
+	"item": [
+		{
+			"name": "Get Leader Ip",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/setup/node/ip",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"setup",
+						"node",
+						"ip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Verifier2 Ip",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5002/setup/node/ip",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"setup",
+						"node",
+						"ip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Verifier1 Ip",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/setup/node/ip",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"setup",
+						"node",
+						"ip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set leader Ip (for Leader) (paste valid ip in URL)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/setup/node/leader/172.17.0.5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"setup",
+						"node",
+						"leader",
+						"172.17.0.5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set leader Ip (for Verifier2) (paste valid ip in URL)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC010\",\r\n    \"CitizenSignature\": \"tT8UOuiNd2GpAjPrVyuMQsZDGC1hHD8zZmKAbELWvucoT7uqTCvd01L0sbWxjv9eQiAYdHZu6Xhx1K+e2n7UK6QrcRIBRsY+Fz9dsnMJdYGSScan8EFOF8ebOxmQpytzrYvHoG1mhpSHFaN16c2fcRbvH7lu5vbb+TLvx+7+5l8=\",\r\n    \"CandidateId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/setup/node/leader/172.17.0.5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"setup",
+						"node",
+						"leader",
+						"172.17.0.5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set leader Ip (for Verifier1) (paste valid ip in URL)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC010\",\r\n    \"CitizenSignature\": \"tT8UOuiNd2GpAjPrVyuMQsZDGC1hHD8zZmKAbELWvucoT7uqTCvd01L0sbWxjv9eQiAYdHZu6Xhx1K+e2n7UK6QrcRIBRsY+Fz9dsnMJdYGSScan8EFOF8ebOxmQpytzrYvHoG1mhpSHFaN16c2fcRbvH7lu5vbb+TLvx+7+5l8=\",\r\n    \"CandidateId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/setup/node/leader/172.17.0.5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"setup",
+						"node",
+						"leader",
+						"172.17.0.5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Verifier2 Ip (for Leader)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC010\",\r\n    \"CitizenSignature\": \"tT8UOuiNd2GpAjPrVyuMQsZDGC1hHD8zZmKAbELWvucoT7uqTCvd01L0sbWxjv9eQiAYdHZu6Xhx1K+e2n7UK6QrcRIBRsY+Fz9dsnMJdYGSScan8EFOF8ebOxmQpytzrYvHoG1mhpSHFaN16c2fcRbvH7lu5vbb+TLvx+7+5l8=\",\r\n    \"CandidateId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/setup/node/verifier2/172.17.0.6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"setup",
+						"node",
+						"verifier2",
+						"172.17.0.6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Verifier2 Ip (for Verifier2)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC010\",\r\n    \"CitizenSignature\": \"tT8UOuiNd2GpAjPrVyuMQsZDGC1hHD8zZmKAbELWvucoT7uqTCvd01L0sbWxjv9eQiAYdHZu6Xhx1K+e2n7UK6QrcRIBRsY+Fz9dsnMJdYGSScan8EFOF8ebOxmQpytzrYvHoG1mhpSHFaN16c2fcRbvH7lu5vbb+TLvx+7+5l8=\",\r\n    \"CandidateId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/setup/node/verifier2/172.17.0.6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"setup",
+						"node",
+						"verifier2",
+						"172.17.0.6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Verifier2 Ip (for Verifier1)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC010\",\r\n    \"CitizenSignature\": \"tT8UOuiNd2GpAjPrVyuMQsZDGC1hHD8zZmKAbELWvucoT7uqTCvd01L0sbWxjv9eQiAYdHZu6Xhx1K+e2n7UK6QrcRIBRsY+Fz9dsnMJdYGSScan8EFOF8ebOxmQpytzrYvHoG1mhpSHFaN16c2fcRbvH7lu5vbb+TLvx+7+5l8=\",\r\n    \"CandidateId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/setup/node/verifier2/172.17.0.6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"setup",
+						"node",
+						"verifier2",
+						"172.17.0.6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Verifier1 Ip (for Leader)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC010\",\r\n    \"CitizenSignature\": \"tT8UOuiNd2GpAjPrVyuMQsZDGC1hHD8zZmKAbELWvucoT7uqTCvd01L0sbWxjv9eQiAYdHZu6Xhx1K+e2n7UK6QrcRIBRsY+Fz9dsnMJdYGSScan8EFOF8ebOxmQpytzrYvHoG1mhpSHFaN16c2fcRbvH7lu5vbb+TLvx+7+5l8=\",\r\n    \"CandidateId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/setup/node/verifier1/172.17.0.7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"setup",
+						"node",
+						"verifier1",
+						"172.17.0.7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Verifier1 Ip (for Verifier2)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC010\",\r\n    \"CitizenSignature\": \"tT8UOuiNd2GpAjPrVyuMQsZDGC1hHD8zZmKAbELWvucoT7uqTCvd01L0sbWxjv9eQiAYdHZu6Xhx1K+e2n7UK6QrcRIBRsY+Fz9dsnMJdYGSScan8EFOF8ebOxmQpytzrYvHoG1mhpSHFaN16c2fcRbvH7lu5vbb+TLvx+7+5l8=\",\r\n    \"CandidateId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/setup/node/verifier1/172.17.0.7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"setup",
+						"node",
+						"verifier1",
+						"172.17.0.7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Verifier1 Ip (for Verifier1)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC010\",\r\n    \"CitizenSignature\": \"tT8UOuiNd2GpAjPrVyuMQsZDGC1hHD8zZmKAbELWvucoT7uqTCvd01L0sbWxjv9eQiAYdHZu6Xhx1K+e2n7UK6QrcRIBRsY+Fz9dsnMJdYGSScan8EFOF8ebOxmQpytzrYvHoG1mhpSHFaN16c2fcRbvH7lu5vbb+TLvx+7+5l8=\",\r\n    \"CandidateId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/setup/node/verifier1/172.17.0.7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"setup",
+						"node",
+						"verifier1",
+						"172.17.0.7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Citizens signed votes for sending",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"CitizenDocumentId\": \"DOC010\",\r\n        \"CitizenSignature\": \"OAJ5gQgv9VAJ5RqyV0OVluPyU8pjdyt0utFvxm2/gnNkVn1D2HHaBBT8fA1lWpCvJ5pRZ2DVY8PrjKgZNv3LjkkDRyBgfr1rjidZqEz/10Ud8QeHLIyKRrJJL4fshKjEXOEiXUoar+wZZmw+wihK0hdh86vc4L1oHDXfauXotSM=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC010\",\r\n        \"CitizenSignature\": \"FFaY9mkmq/HucgRFTjAnVDjeCw/TCNPx92ShRyouEau1xXDmLLvAJo/3NzUDSVFeTomU85mmSXyVxHuc+Shu7Y6pD8cYEm7fhnauFXAnViII6ZF/9A6COeXKCY/HwLOT1EUH80iX6h+ZrgfUGt8/U5S8QVVqdNeEkX+G7aSjn68=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC011\",\r\n        \"CitizenSignature\": \"VABYs/XT+cACgmQNyS8LPJc/mtTi91rLmNPg3jwEw8HuL7ZUPAW+L2ug+n6FQmzJRUlN5ta286jUhIiyFFPLS3XJZnl5eEn/dITDZlM+huckxviqbEKngEA87sRalV/KhebKd370Zeibr7J8qnRhCyWXTktqrZeDBd5mqUOAE9o=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC011\",\r\n        \"CitizenSignature\": \"ccmEGB56ittQI2st21b6NwiU4m/NUrJ5Y0v8B7Qfy+mLJuE74zjPLF7hdD7cLWycuJeQup2U0a9Eq+WNzvJJlejUcM9g1h2Ansbb9jqLY1nqmuM9EbVJYpJdtclm0o+b9fJOFYDQ5uZiEI7fG8qn8DZHwMKaySRx0EttxkSJbTs=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC012\",\r\n        \"CitizenSignature\": \"gDFtToPZm8YvkuyZrCAJ0WBRbEVlu6jKXBuw8kQy2FUykezWDaBHkVcH11WITy/1SYyJHWCIKP49H4NFf4i7yzx7mzmG0TJOcXpkPV22q5Rech5y1qtZ+3n2wDqgYnia5xpJdcHqQoG467XiT3yVU7akGIPKWrsadRfiYBg+iLA=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC012\",\r\n        \"CitizenSignature\": \"mGE8rrTpFjfRBvHe2MgasOspGIO22g3CJnpuc89x2IkVB688RsXP73BQEGs+p+PfEJ9ilOmiAXDHBliuve7EvdnIncGnfvDkNJ/qTqYxPlx/jOR/0Pf/+3ztFjJCcZ8YuyNcfcUWNkhNgFR86V9EE+loh0j87nOrm4bGVRDnNN4=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC013\",\r\n        \"CitizenSignature\": \"Mbt7DPbtEPNGmB3yZH7F106CoFm0pf3jHo5+g+RvGP/qRh0IWpAmzV8Mdzk/YnWWH1JlMJddscQjRiYR4n/QeWWifFF+T8G4+SVKfvAG6oj3OnHp3E3SRtLKzXMgnpdW2iz+/c9hyposUbjYJkQfoixy3laFMmN/Vwh9NLI3IKk=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC013\",\r\n        \"CitizenSignature\": \"QtAGpQPuF+nK3jIDYhImemWE017wz8uaAr9Kjkgw7ziK+/Gt/AthMaas5NU+d7Ja5EiBnpVIujo9jdf1GUUnltRSb2PWgG+fCXo6D/ZyRmTA9xlrfwhE3fZmzGEkr5SUZvYcxY9FMyEsvksf1hU5V+cPbYu3nOJ9XmnD9r4iXQI=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC014\",\r\n        \"CitizenSignature\": \"gnuD5mg5hQt6SYGAWM30oM7M96aehnsgJXN9UAUGc3mBqQXUNbRdp0LsaHSPWSGq4EOJFvnOXQODFkhOiTDC8rJ1XjmKoV4rxrPD6Nt2zmGwGfCsR3L/Gdju+uHCW4NBA1TYGYIBB6p9JhiXSqi/ZahkpkjGz8hnf+1WCs3YVBY=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC014\",\r\n        \"CitizenSignature\": \"dvnld3PLcYKMfnueXQrYrixTnkiHSEGq0l3eqIexLArRbi/wpFswyFs+vnxMx8FC38huDwXNMGwvi3VYjiRFwh8H0vK1sfsG5VR3I2vHa2UDCIcR8n+FtoBO7Nt0jG5UftvMtq6w4iw2csssXAsQRO1CY24iOq3+L8tqPMJK46I=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC015\",\r\n        \"CitizenSignature\": \"fD2nSHPuMCTPK6iRuXyYBIabg4PzAoM8KMN2uT7ONU+AW3rzuByQ1SC7RLeQSR2wWyxl+fpNpeS2S/4m3CJBJzdYvamO4hMnHbLHaBZghhupGG3ffDw4LN0FzSZ3ylLfFHUaTm33CkqXTFBqm0EHPUVNvZsQRwevTyq/ZJjwkNg=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC015\",\r\n        \"CitizenSignature\": \"LQla8/Wu66AaTGtojIkoTwODvOxVMwCZoA4eKUZCk9UnO8i6IbLhXi2JWye8PEfGyR6ehUh3LgomPKXhxu5W/kUt/a4kjgpdOG77iKqBAunn4YVyQ36ck2dy5W22RgdkHOxgIRoPCgFqlp5go0cQbXfKFDOV+G+D5t/LBCR9tdc=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC016\",\r\n        \"CitizenSignature\": \"XZqhtggPmUG8yAE50OGWsBLxCxVhn1mDzRw7j8Ihj7G1TqYBusB+ui0+aOGn0nm50itAPIbayjJEYLM93SumAi9GWrogvtWa6w/Xyo0YtnNSlEI7T/alThmYVfwPQf+dWQChzy8M4W1A/J40uZUz/c+84QIf1jd4UhMjngbkAxQ=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC016\",\r\n        \"CitizenSignature\": \"BGyxVUkJBnyleDkKw3gappRD0h/oyNviQVXEFPkRGbanrd4Nfms5F9XknwoPZOpYuMt3piqcG5s3m2KNzc6Tb8Iq3mUaTh3sIdFgyr71mZIBFERuxvzEi+rWdteLAIrjLEFCArRZKyiXnS7rw7jysPDV2lPHzC0DAVKLrrw1E+Y=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC017\",\r\n        \"CitizenSignature\": \"V91Qb29aiTXNZrBiNQJt1YosFLH3VB5TCriV2gvdyFDwGoSrhA8PZpn3sFRZp1ofAUQCV9dBq+jzNZ58xJJ+5eXehRE2cM5egntt9xiR+AQCX6yTf4I3fxhYXq2S/1awjAy3FyuZDH8F5FJcM2P64qIvqYW2cc4rHvAM0RIZetg=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC017\",\r\n        \"CitizenSignature\": \"dnU55nhMIsz0xgeL5wCnIg3B8YRdENkkGb5wt1N5fWE0obziDrvH9+GTbLhs5RuYlJ+0fKUEOw32xnOAPLs+6Fos1wQ34QIBlZe+kN55I29olPbUCs3MFouaMWWWLSUXm3eGlUfehtMHfoZmInLbNZbYBu98Wq4n9hokaMnKOG8=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC018\",\r\n        \"CitizenSignature\": \"N2mbUZ/YH/4BRNeZq7mLKGbj+U9bFdtl0Ti+Gjh25uKh10VEKIK6yuFRHTajoFvnCFPlpUSb2E48POaxU2+LAhIpKJw4mSmI0PNtpDszRcJ9RlLXf7v5qQHwHQMfCCySO6cs11HjzSXy0vDf3EoemUS91P6NMcdt3xUCgqfx1wE=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC018\",\r\n        \"CitizenSignature\": \"iMPLCpFMd7CmNDYgxM37YFyfNuevcxsBRqGd9oYQZEVy6V7a+qdBEpbHLapXAkFsvLSUNDEgyEzRAPlmlhPeda5io0iF6ZEtk3CWVXrWxc0JxBIXaEVTceYu7URfQiXNjWrHqh03l0HlQe1zqoczJYmbGuTLJR0+xjMEPLIV8WQ=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC019\",\r\n        \"CitizenSignature\": \"eZo1WuZS0PA8nikYVhcVi+acH7ScftSluWZWZj2R2MldbhwDvqHkBx+FaSENJwK3i7v+tMjbzGEuR3ZL+tsRDJevV8eVKbM99ItIMKCck016BSul+yilvJPp1kFyA7ND3+6wGxRs3F8m58jzsnPMcR1Cv2NBdptgTotT38Qf6+0=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC019\",\r\n        \"CitizenSignature\": \"La5CUz0gJV6KUXPKwjoRfrKNL9SDX/Ju5FVZqDsC7XLIb8hr3p/vmzOsAe13YmfPge1SOrwAxgZ1oqghix7wrwAGHIni8J20HixWxjpy2N9MuWPxDmte5QR/5suPpnur43tk/xA6Cfp9qYgwydQiEIRq6cCb8BT8D+BhsKzFmHY=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC020\",\r\n        \"CitizenSignature\": \"ot3QOspvaGC3Ye1O/1GUI1wBaq7yrHm9u8jV2Ri7k5ty9qWRrpRxnuxogKXLngOv+oAgD6OmrykLVFjKFcBwy2toIkH8zjCMERn1w9cSv9/IKtNuTaHXHhCOn5P6HgU+vb3K8olBjeNbOY4ALLTn9fNcvOaK3Zj/Ot4Y0il0IQk=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC020\",\r\n        \"CitizenSignature\": \"s2shsaRO0l2VMUJK22PJ/ZrMD/dDaJ5vQLE6YLY+AmJBwGvYCNvtVDH1MCOK1zuwxWqc0EiJXINDspisKnkJtzgztdp/nTkcQ7y/peQDxlSsmrmoTcXdC5sV2cq37imm8lTXpjL2Yq22dVV3ZomnO14RlmVQT6iqgtiu3g2/AeI=\",\r\n        \"CandidateId\": 2\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC021\",\r\n        \"CitizenSignature\": \"Vx70ATzVF15zuUtUuUXLkVZdM8iAB2ApX1e981PtnEHkeyh9NcZaUXjPjc3amhktpr/Zq/VYv89PL9S61+tMkA7o823AKT39j074lc/BZKA4mjK+SuQLPndQpZ0uJsfKmw1XfcGbRdwkTSOkF5TNs/+Q5JRErOgh868zvlvbKfc=\",\r\n        \"CandidateId\": 1\r\n    },\r\n    {\r\n        \"CitizenDocumentId\": \"DOC021\",\r\n        \"CitizenSignature\": \"3CH+WWN21lZ1SDKltW2fpTl1rWZPYmX/gN9WQzVkA/t2YWIhcp6yjDa97tKBXIzcO0Fisit+z2RUz0SsEDoRBGzD7VvdVLWHRKPN11noeyobihCTQ9L4NDSW53CIsT9LQEhCzkTQkRbAw0tETXOItp/wSI2XOa/4Cz0oP6erITA=\",\r\n        \"CandidateId\": 2\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "All signed votes examples",
+					"host": [
+						"All signed votes examples"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset citizens",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/database/resetCitizensAndRelatedTables",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"database",
+						"resetCitizensAndRelatedTables"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send citizens to verifier2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/database/sendCitizens/172.17.0.6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"database",
+						"sendCitizens",
+						"172.17.0.6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send citizens to verifier1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/database/sendCitizens/172.17.0.7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"database",
+						"sendCitizens",
+						"172.17.0.7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get table",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/database/tables/votesqueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"database",
+						"tables",
+						"votesqueue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Candidates",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"Name\": \"Daniel\",\r\n        \"Surname\": \"Yanko\"\r\n    },\r\n    {\r\n        \"Name\": \"John\",\r\n        \"Surname\": \"Miller\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/database/addcandidates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"database",
+						"addcandidates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set leader id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/setup/node/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"setup",
+						"node",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set verifier2 id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/setup/node/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"setup",
+						"node",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set verifier1 id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/setup/node/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"setup",
+						"node",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate node keys",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/setup/GenerateNodeKeys",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"setup",
+						"GenerateNodeKeys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nodes keys for testing (sequence Leader - Verifier2 - Verifier1)",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"D\": null,\r\n        \"DP\": null,\r\n        \"DQ\": null,\r\n        \"Exponent\": \"AQAB\",\r\n        \"InverseQ\": null,\r\n        \"Modulus\": \"yFlMexaXY1tCmZy9EIkkaC+Zi9Q+XxkUdOc4iDewWNE8oqPCqoYwqmf/c1mmx9WBcZv0TzwftebaOh5Tq0Y8BZE5fXDHF6+bE3Ayn5mstWCXJxuqs122i57sHfU/Jg27WLajgvrbHWIw0kbvNH6QsjHubDiOxfaNWQ55BLpRLI8=\",\r\n        \"P\": null,\r\n        \"Q\": null\r\n    },\r\n    {\r\n        \"D\": \"P9yHDm0jEF6UmhZmBZFRc4xIq1OaFgIOjTzuvizSH12CsGz2rhhcBtVjjccz7FrYCfimJWOK0Ban1QK5tMyMcMF6su9ejluJpw5tGCQALjg8IldphhTd/KH9REgO8tfGCc+OgIrrcQseWwIWyN6tYYkfepFEHJ1Ynt+eK4LX7ZE=\",\r\n        \"DP\": \"hX7kFDBmsxIeoDAa62/4epHvo8zfm5fkrNWY+hJzA3btPL9kWNCJVnfZ9IWojE843ti8bPe5cfA0/J4Pb87A4Q==\",\r\n        \"DQ\": \"P1LL6RqSbwY1751aWDi5l8lNDQkvG7rQU5F1/Zv7+Z5hsDEO4qI3fWEKheo/90ah2nJJqWluznCO8pWeZlVJAw==\",\r\n        \"Exponent\": \"AQAB\",\r\n        \"InverseQ\": \"Bpr4ruyTuRGW4V3mGdpSaCaLbpOkc3xGHn/yZ8NyDo3vG+kPPY6EKQwHPoab9sMRpWukTlG7IyUl7d+xjrKfMA==\",\r\n        \"Modulus\": \"yFlMexaXY1tCmZy9EIkkaC+Zi9Q+XxkUdOc4iDewWNE8oqPCqoYwqmf/c1mmx9WBcZv0TzwftebaOh5Tq0Y8BZE5fXDHF6+bE3Ayn5mstWCXJxuqs122i57sHfU/Jg27WLajgvrbHWIw0kbvNH6QsjHubDiOxfaNWQ55BLpRLI8=\",\r\n        \"P\": \"41CtzxNIH+EK0Tf/wevpgivOw7A0oRFLpROsdLciXFWszURiSGZknbn6BCXd9TJRuEgfigE2mx9H+VDNRn441Q==\",\r\n        \"Q\": \"4aF725/KPePQl3owQ0vPhAAC+7PXQoPAdEVVxAoZU2rlqRqySiT4BOgZ0WJjF4tTCbP6wzS9V+Kt8IC7AZGB0w==\"\r\n    },\r\n    {\r\n        \"D\": null,\r\n        \"DP\": null,\r\n        \"DQ\": null,\r\n        \"Exponent\": \"AQAB\",\r\n        \"InverseQ\": null,\r\n        \"Modulus\": \"8Auate7aNUf0p+0A9vhVHTuwuaoIbiIiQ+NafU4AMPLsrB9IehCj09AUeYCyzxtaIhiTlKFPnEBy0HDi9q7toEMKxC9gq7x+lpRdlrfskQarOQ2ALFLjHbdEf31+E040Rvff63eDOL1b+c8vCCR+M5J6MLb9tmDKQ0MLVbi/ihM=\",\r\n        \"P\": null,\r\n        \"Q\": null\r\n    },\r\n    {\r\n        \"D\": \"FEbmqreidx287PJ4QmR3zCBerVBPpf38Jv/thOgx2/CpTWDXHniJXjsVf63/bL9Cvd6VmNiHgQtwp2rhwTTFnbon4S0ysZ5QqnBNYlnYpjr9SFTgbaGyLnUJvKx5OJaanLVeuKi6ReDF82RGjQx+j7RZz0J31HSKk5KO36U88AE=\",\r\n        \"DP\": \"OvEuQd1TFo7ZO0B8nReYH/Z8qWTTAITiX5072kYF4KNkYkhGRzXWi/0oX2dxlFt119NmxJbYyF6u4wLrX7nmpQ==\",\r\n        \"DQ\": \"TmTtzLwZqgg1mfbXzdtoeTX+SQO63Q7Qoe7LTtyc6mkzOXA4AqaUerhMvLaf0ng6ske1sNzwtWrZkTiEI88cAQ==\",\r\n        \"Exponent\": \"AQAB\",\r\n        \"InverseQ\": \"ssjiw5XjzWoPaNDrzuMwePaU5+pio22b5NeMFJgArGON29hmflq8dFAeKorpFcDP18GYRHQ52bFlsLQH4yTsnQ==\",\r\n        \"Modulus\": \"8Auate7aNUf0p+0A9vhVHTuwuaoIbiIiQ+NafU4AMPLsrB9IehCj09AUeYCyzxtaIhiTlKFPnEBy0HDi9q7toEMKxC9gq7x+lpRdlrfskQarOQ2ALFLjHbdEf31+E040Rvff63eDOL1b+c8vCCR+M5J6MLb9tmDKQ0MLVbi/ihM=\",\r\n        \"P\": \"/ZH782xWgfcOdB1OCHkUhxXBawClLWdleVsJtGlEGl7t2Hyht89L4uO9qks7yYDteCxXHUz0Qd1exbf7eT/L0w==\",\r\n        \"Q\": \"8lhxbtPVLpXstJsqwXCF8tfnQeh5uvLVgNzNi2X2bKgP3/gYkm8uMTqhxnb5WPkCo3uOTeT4TNfM8h09M9GgwQ==\"\r\n    },\r\n    {\r\n        \"D\": null,\r\n        \"DP\": null,\r\n        \"DQ\": null,\r\n        \"Exponent\": \"AQAB\",\r\n        \"InverseQ\": null,\r\n        \"Modulus\": \"1igpJzfH+VE5lizu6FaKOnzO41sgmgcpHVyA+puIN9EOhw2Vqnn+xiZnn+RmqHV0HBge8KB5bTSYadBTJzuNGpNcq2Wt8RB37hZk494VEUsGq+SLUxLpx1f6EN/DlY9LkOtUo7S/JsWnkBj2+Sy/qUl+CTsX8/oI3iErO7++gcs=\",\r\n        \"P\": null,\r\n        \"Q\": null\r\n    },\r\n    {\r\n        \"D\": \"VydK8DHsSRN8OxiYNaeaY4kNbUtVrjmByvgtaU/IlOaYYe/uW82AGMXiYBjEioQaN6C9XrIAGKhR6qYkYRAEMPDugbLunlI6G5X1G+I2LYuvUSSU40hRsFm3sEhEa03tKvQKikfEBbbs+gHF7Ho4Xj9KjEbfo789Zh18kWRhKUk=\",\r\n        \"DP\": \"l+IyM+Fzq5LUn6nx7nCd9y3WKUyAsrjDnTFvZSrc7Rtir+x6psb3aVaPDTE84bc89RU9iob92UTI3EwjGsImzQ==\",\r\n        \"DQ\": \"4yut2h/fxTaNfmAU3sOeKMu5kiA5mDZd6u/eT0P30DDtjQ5eFPaXwVNX81hlOX10wCUc8NbZxvGOla710ZZa5w==\",\r\n        \"Exponent\": \"AQAB\",\r\n        \"InverseQ\": \"bPRaFwsibtZMD9fsKgj/QVMawZqOuCTVnynmbs2we1Zck+JiNDgVOHFUdGVwXhuIOF+wtW7mogYBWYgbPJa2wA==\",\r\n        \"Modulus\": \"1igpJzfH+VE5lizu6FaKOnzO41sgmgcpHVyA+puIN9EOhw2Vqnn+xiZnn+RmqHV0HBge8KB5bTSYadBTJzuNGpNcq2Wt8RB37hZk494VEUsGq+SLUxLpx1f6EN/DlY9LkOtUo7S/JsWnkBj2+Sy/qUl+CTsX8/oI3iErO7++gcs=\",\r\n        \"P\": \"7ytiQEBpMGSubyPzSDK2Lh6HmbZcGdGZQLi0+sE3iZtUs6E3T8uIZq9q7AReIQgkV6D+s2E7VA7M2TYn/LxBhQ==\",\r\n        \"Q\": \"5Tota/RC+qsZB1FaygW4CWdykY2LRstKRJkUQJJWoMtwOE0DuuIxXyA4J3LMzX3d2UscT97uy1eXX1UjuXZvDw==\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "All signed votes examples",
+					"host": [
+						"All signed votes examples"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Leader private key",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": \"P9yHDm0jEF6UmhZmBZFRc4xIq1OaFgIOjTzuvizSH12CsGz2rhhcBtVjjccz7FrYCfimJWOK0Ban1QK5tMyMcMF6su9ejluJpw5tGCQALjg8IldphhTd/KH9REgO8tfGCc+OgIrrcQseWwIWyN6tYYkfepFEHJ1Ynt+eK4LX7ZE=\",\r\n    \"DP\": \"hX7kFDBmsxIeoDAa62/4epHvo8zfm5fkrNWY+hJzA3btPL9kWNCJVnfZ9IWojE843ti8bPe5cfA0/J4Pb87A4Q==\",\r\n    \"DQ\": \"P1LL6RqSbwY1751aWDi5l8lNDQkvG7rQU5F1/Zv7+Z5hsDEO4qI3fWEKheo/90ah2nJJqWluznCO8pWeZlVJAw==\",\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": \"Bpr4ruyTuRGW4V3mGdpSaCaLbpOkc3xGHn/yZ8NyDo3vG+kPPY6EKQwHPoab9sMRpWukTlG7IyUl7d+xjrKfMA==\",\r\n    \"Modulus\": \"yFlMexaXY1tCmZy9EIkkaC+Zi9Q+XxkUdOc4iDewWNE8oqPCqoYwqmf/c1mmx9WBcZv0TzwftebaOh5Tq0Y8BZE5fXDHF6+bE3Ayn5mstWCXJxuqs122i57sHfU/Jg27WLajgvrbHWIw0kbvNH6QsjHubDiOxfaNWQ55BLpRLI8=\",\r\n    \"P\": \"41CtzxNIH+EK0Tf/wevpgivOw7A0oRFLpROsdLciXFWszURiSGZknbn6BCXd9TJRuEgfigE2mx9H+VDNRn441Q==\",\r\n    \"Q\": \"4aF725/KPePQl3owQ0vPhAAC+7PXQoPAdEVVxAoZU2rlqRqySiT4BOgZ0WJjF4tTCbP6wzS9V+Kt8IC7AZGB0w==\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/setup/node/PrivateKey",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"setup",
+						"node",
+						"PrivateKey"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Verifier2 private key",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": \"FEbmqreidx287PJ4QmR3zCBerVBPpf38Jv/thOgx2/CpTWDXHniJXjsVf63/bL9Cvd6VmNiHgQtwp2rhwTTFnbon4S0ysZ5QqnBNYlnYpjr9SFTgbaGyLnUJvKx5OJaanLVeuKi6ReDF82RGjQx+j7RZz0J31HSKk5KO36U88AE=\",\r\n    \"DP\": \"OvEuQd1TFo7ZO0B8nReYH/Z8qWTTAITiX5072kYF4KNkYkhGRzXWi/0oX2dxlFt119NmxJbYyF6u4wLrX7nmpQ==\",\r\n    \"DQ\": \"TmTtzLwZqgg1mfbXzdtoeTX+SQO63Q7Qoe7LTtyc6mkzOXA4AqaUerhMvLaf0ng6ske1sNzwtWrZkTiEI88cAQ==\",\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": \"ssjiw5XjzWoPaNDrzuMwePaU5+pio22b5NeMFJgArGON29hmflq8dFAeKorpFcDP18GYRHQ52bFlsLQH4yTsnQ==\",\r\n    \"Modulus\": \"8Auate7aNUf0p+0A9vhVHTuwuaoIbiIiQ+NafU4AMPLsrB9IehCj09AUeYCyzxtaIhiTlKFPnEBy0HDi9q7toEMKxC9gq7x+lpRdlrfskQarOQ2ALFLjHbdEf31+E040Rvff63eDOL1b+c8vCCR+M5J6MLb9tmDKQ0MLVbi/ihM=\",\r\n    \"P\": \"/ZH782xWgfcOdB1OCHkUhxXBawClLWdleVsJtGlEGl7t2Hyht89L4uO9qks7yYDteCxXHUz0Qd1exbf7eT/L0w==\",\r\n    \"Q\": \"8lhxbtPVLpXstJsqwXCF8tfnQeh5uvLVgNzNi2X2bKgP3/gYkm8uMTqhxnb5WPkCo3uOTeT4TNfM8h09M9GgwQ==\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/setup/node/PrivateKey",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"setup",
+						"node",
+						"PrivateKey"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Verifier1 private key",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": \"VydK8DHsSRN8OxiYNaeaY4kNbUtVrjmByvgtaU/IlOaYYe/uW82AGMXiYBjEioQaN6C9XrIAGKhR6qYkYRAEMPDugbLunlI6G5X1G+I2LYuvUSSU40hRsFm3sEhEa03tKvQKikfEBbbs+gHF7Ho4Xj9KjEbfo789Zh18kWRhKUk=\",\r\n    \"DP\": \"l+IyM+Fzq5LUn6nx7nCd9y3WKUyAsrjDnTFvZSrc7Rtir+x6psb3aVaPDTE84bc89RU9iob92UTI3EwjGsImzQ==\",\r\n    \"DQ\": \"4yut2h/fxTaNfmAU3sOeKMu5kiA5mDZd6u/eT0P30DDtjQ5eFPaXwVNX81hlOX10wCUc8NbZxvGOla710ZZa5w==\",\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": \"bPRaFwsibtZMD9fsKgj/QVMawZqOuCTVnynmbs2we1Zck+JiNDgVOHFUdGVwXhuIOF+wtW7mogYBWYgbPJa2wA==\",\r\n    \"Modulus\": \"1igpJzfH+VE5lizu6FaKOnzO41sgmgcpHVyA+puIN9EOhw2Vqnn+xiZnn+RmqHV0HBge8KB5bTSYadBTJzuNGpNcq2Wt8RB37hZk494VEUsGq+SLUxLpx1f6EN/DlY9LkOtUo7S/JsWnkBj2+Sy/qUl+CTsX8/oI3iErO7++gcs=\",\r\n    \"P\": \"7ytiQEBpMGSubyPzSDK2Lh6HmbZcGdGZQLi0+sE3iZtUs6E3T8uIZq9q7AReIQgkV6D+s2E7VA7M2TYn/LxBhQ==\",\r\n    \"Q\": \"5Tota/RC+qsZB1FaygW4CWdykY2LRstKRJkUQJJWoMtwOE0DuuIxXyA4J3LMzX3d2UscT97uy1eXX1UjuXZvDw==\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/setup/node/PrivateKey",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"setup",
+						"node",
+						"PrivateKey"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set leader public key (for Leader)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": null,\r\n    \"DP\": null,\r\n    \"DQ\": null,\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": null,\r\n    \"Modulus\": \"yFlMexaXY1tCmZy9EIkkaC+Zi9Q+XxkUdOc4iDewWNE8oqPCqoYwqmf/c1mmx9WBcZv0TzwftebaOh5Tq0Y8BZE5fXDHF6+bE3Ayn5mstWCXJxuqs122i57sHfU/Jg27WLajgvrbHWIw0kbvNH6QsjHubDiOxfaNWQ55BLpRLI8=\",\r\n    \"P\": null,\r\n    \"Q\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/setup/node/publickey/leader",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"setup",
+						"node",
+						"publickey",
+						"leader"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set leader public key (for Verifier2) Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": null,\r\n    \"DP\": null,\r\n    \"DQ\": null,\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": null,\r\n    \"Modulus\": \"yFlMexaXY1tCmZy9EIkkaC+Zi9Q+XxkUdOc4iDewWNE8oqPCqoYwqmf/c1mmx9WBcZv0TzwftebaOh5Tq0Y8BZE5fXDHF6+bE3Ayn5mstWCXJxuqs122i57sHfU/Jg27WLajgvrbHWIw0kbvNH6QsjHubDiOxfaNWQ55BLpRLI8=\",\r\n    \"P\": null,\r\n    \"Q\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/setup/node/publickey/leader",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"setup",
+						"node",
+						"publickey",
+						"leader"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set leader public key (for Verifier1)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": null,\r\n    \"DP\": null,\r\n    \"DQ\": null,\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": null,\r\n    \"Modulus\": \"yFlMexaXY1tCmZy9EIkkaC+Zi9Q+XxkUdOc4iDewWNE8oqPCqoYwqmf/c1mmx9WBcZv0TzwftebaOh5Tq0Y8BZE5fXDHF6+bE3Ayn5mstWCXJxuqs122i57sHfU/Jg27WLajgvrbHWIw0kbvNH6QsjHubDiOxfaNWQ55BLpRLI8=\",\r\n    \"P\": null,\r\n    \"Q\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/setup/node/publickey/leader",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"setup",
+						"node",
+						"publickey",
+						"leader"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set verifier2 public key (for Leader)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": null,\r\n    \"DP\": null,\r\n    \"DQ\": null,\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": null,\r\n    \"Modulus\": \"8Auate7aNUf0p+0A9vhVHTuwuaoIbiIiQ+NafU4AMPLsrB9IehCj09AUeYCyzxtaIhiTlKFPnEBy0HDi9q7toEMKxC9gq7x+lpRdlrfskQarOQ2ALFLjHbdEf31+E040Rvff63eDOL1b+c8vCCR+M5J6MLb9tmDKQ0MLVbi/ihM=\",\r\n    \"P\": null,\r\n    \"Q\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/setup/node/publickey/verifier2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"setup",
+						"node",
+						"publickey",
+						"verifier2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set verifier2 public key (for Verifier2)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": null,\r\n    \"DP\": null,\r\n    \"DQ\": null,\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": null,\r\n    \"Modulus\": \"8Auate7aNUf0p+0A9vhVHTuwuaoIbiIiQ+NafU4AMPLsrB9IehCj09AUeYCyzxtaIhiTlKFPnEBy0HDi9q7toEMKxC9gq7x+lpRdlrfskQarOQ2ALFLjHbdEf31+E040Rvff63eDOL1b+c8vCCR+M5J6MLb9tmDKQ0MLVbi/ihM=\",\r\n    \"P\": null,\r\n    \"Q\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/setup/node/publickey/verifier2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"setup",
+						"node",
+						"publickey",
+						"verifier2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set verifier2 public key (for Verifier1)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": null,\r\n    \"DP\": null,\r\n    \"DQ\": null,\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": null,\r\n    \"Modulus\": \"8Auate7aNUf0p+0A9vhVHTuwuaoIbiIiQ+NafU4AMPLsrB9IehCj09AUeYCyzxtaIhiTlKFPnEBy0HDi9q7toEMKxC9gq7x+lpRdlrfskQarOQ2ALFLjHbdEf31+E040Rvff63eDOL1b+c8vCCR+M5J6MLb9tmDKQ0MLVbi/ihM=\",\r\n    \"P\": null,\r\n    \"Q\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/setup/node/publickey/verifier2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"setup",
+						"node",
+						"publickey",
+						"verifier2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set verifier1 public key (for Leader)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": null,\r\n    \"DP\": null,\r\n    \"DQ\": null,\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": null,\r\n    \"Modulus\": \"1igpJzfH+VE5lizu6FaKOnzO41sgmgcpHVyA+puIN9EOhw2Vqnn+xiZnn+RmqHV0HBge8KB5bTSYadBTJzuNGpNcq2Wt8RB37hZk494VEUsGq+SLUxLpx1f6EN/DlY9LkOtUo7S/JsWnkBj2+Sy/qUl+CTsX8/oI3iErO7++gcs=\",\r\n    \"P\": null,\r\n    \"Q\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/setup/node/publickey/verifier1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"setup",
+						"node",
+						"publickey",
+						"verifier1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set verifier1 public key (for Verifier2)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": null,\r\n    \"DP\": null,\r\n    \"DQ\": null,\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": null,\r\n    \"Modulus\": \"1igpJzfH+VE5lizu6FaKOnzO41sgmgcpHVyA+puIN9EOhw2Vqnn+xiZnn+RmqHV0HBge8KB5bTSYadBTJzuNGpNcq2Wt8RB37hZk494VEUsGq+SLUxLpx1f6EN/DlY9LkOtUo7S/JsWnkBj2+Sy/qUl+CTsX8/oI3iErO7++gcs=\",\r\n    \"P\": null,\r\n    \"Q\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/setup/node/publickey/verifier1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"setup",
+						"node",
+						"publickey",
+						"verifier1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set verifier1 public key (for Verifier1)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"D\": null,\r\n    \"DP\": null,\r\n    \"DQ\": null,\r\n    \"Exponent\": \"AQAB\",\r\n    \"InverseQ\": null,\r\n    \"Modulus\": \"1igpJzfH+VE5lizu6FaKOnzO41sgmgcpHVyA+puIN9EOhw2Vqnn+xiZnn+RmqHV0HBge8KB5bTSYadBTJzuNGpNcq2Wt8RB37hZk494VEUsGq+SLUxLpx1f6EN/DlY9LkOtUo7S/JsWnkBj2+Sy/qUl+CTsX8/oI3iErO7++gcs=\",\r\n    \"P\": null,\r\n    \"Q\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/setup/node/publickey/verifier1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"setup",
+						"node",
+						"publickey",
+						"verifier1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send vote to leader 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC010\",\r\n    \"CitizenSignature\": \"OAJ5gQgv9VAJ5RqyV0OVluPyU8pjdyt0utFvxm2/gnNkVn1D2HHaBBT8fA1lWpCvJ5pRZ2DVY8PrjKgZNv3LjkkDRyBgfr1rjidZqEz/10Ud8QeHLIyKRrJJL4fshKjEXOEiXUoar+wZZmw+wihK0hdh86vc4L1oHDXfauXotSM=\",\r\n    \"CandidateId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/leader/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"leader",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get votesqueue table",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/database/tables/votesqueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"database",
+						"tables",
+						"votesqueue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send vote to leader 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC011\",\r\n    \"CitizenSignature\": \"VABYs/XT+cACgmQNyS8LPJc/mtTi91rLmNPg3jwEw8HuL7ZUPAW+L2ug+n6FQmzJRUlN5ta286jUhIiyFFPLS3XJZnl5eEn/dITDZlM+huckxviqbEKngEA87sRalV/KhebKd370Zeibr7J8qnRhCyWXTktqrZeDBd5mqUOAE9o=\",\r\n    \"CandidateId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/leader/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"leader",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send vote to leader 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC012\",\r\n    \"CitizenSignature\": \"mGE8rrTpFjfRBvHe2MgasOspGIO22g3CJnpuc89x2IkVB688RsXP73BQEGs+p+PfEJ9ilOmiAXDHBliuve7EvdnIncGnfvDkNJ/qTqYxPlx/jOR/0Pf/+3ztFjJCcZ8YuyNcfcUWNkhNgFR86V9EE+loh0j87nOrm4bGVRDnNN4=\",\r\n    \"CandidateId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/leader/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"leader",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send vote to leader 4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CitizenDocumentId\": \"DOC013\",\r\n    \"CitizenSignature\": \"QtAGpQPuF+nK3jIDYhImemWE017wz8uaAr9Kjkgw7ziK+/Gt/AthMaas5NU+d7Ja5EiBnpVIujo9jdf1GUUnltRSb2PWgG+fCXo6D/ZyRmTA9xlrfwhE3fZmzGEkr5SUZvYcxY9FMyEsvksf1hU5V+cPbYu3nOJ9XmnD9r4iXQI=\",\r\n    \"CandidateId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/leader/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"leader",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send vote to leader 5",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"CitizenDocumentId\": \"DOC014\",\r\n        \"CitizenSignature\": \"gnuD5mg5hQt6SYGAWM30oM7M96aehnsgJXN9UAUGc3mBqQXUNbRdp0LsaHSPWSGq4EOJFvnOXQODFkhOiTDC8rJ1XjmKoV4rxrPD6Nt2zmGwGfCsR3L/Gdju+uHCW4NBA1TYGYIBB6p9JhiXSqi/ZahkpkjGz8hnf+1WCs3YVBY=\",\r\n        \"CandidateId\": 1\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/leader/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"leader",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Leader blocks table",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/database/tables/blocks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"database",
+						"tables",
+						"blocks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Verifier2 blocks table",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5002/database/tables/blocks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"database",
+						"tables",
+						"blocks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Verifier1 blocks table",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/database/tables/blocks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"database",
+						"tables",
+						"blocks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send vote to leader 6",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"CitizenDocumentId\": \"DOC015\",\r\n        \"CitizenSignature\": \"fD2nSHPuMCTPK6iRuXyYBIabg4PzAoM8KMN2uT7ONU+AW3rzuByQ1SC7RLeQSR2wWyxl+fpNpeS2S/4m3CJBJzdYvamO4hMnHbLHaBZghhupGG3ffDw4LN0FzSZ3ylLfFHUaTm33CkqXTFBqm0EHPUVNvZsQRwevTyq/ZJjwkNg=\",\r\n        \"CandidateId\": 1\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/leader/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"leader",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send vote to leader 7",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"CitizenDocumentId\": \"DOC016\",\r\n        \"CitizenSignature\": \"BGyxVUkJBnyleDkKw3gappRD0h/oyNviQVXEFPkRGbanrd4Nfms5F9XknwoPZOpYuMt3piqcG5s3m2KNzc6Tb8Iq3mUaTh3sIdFgyr71mZIBFERuxvzEi+rWdteLAIrjLEFCArRZKyiXnS7rw7jysPDV2lPHzC0DAVKLrrw1E+Y=\",\r\n        \"CandidateId\": 2\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/leader/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"leader",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send vote to leader 8",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"CitizenDocumentId\": \"DOC017\",\r\n        \"CitizenSignature\": \"V91Qb29aiTXNZrBiNQJt1YosFLH3VB5TCriV2gvdyFDwGoSrhA8PZpn3sFRZp1ofAUQCV9dBq+jzNZ58xJJ+5eXehRE2cM5egntt9xiR+AQCX6yTf4I3fxhYXq2S/1awjAy3FyuZDH8F5FJcM2P64qIvqYW2cc4rHvAM0RIZetg=\",\r\n        \"CandidateId\": 1\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/leader/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"leader",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send vote to leader 9",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"CitizenDocumentId\": \"DOC018\",\r\n        \"CitizenSignature\": \"iMPLCpFMd7CmNDYgxM37YFyfNuevcxsBRqGd9oYQZEVy6V7a+qdBEpbHLapXAkFsvLSUNDEgyEzRAPlmlhPeda5io0iF6ZEtk3CWVXrWxc0JxBIXaEVTceYu7URfQiXNjWrHqh03l0HlQe1zqoczJYmbGuTLJR0+xjMEPLIV8WQ=\",\r\n        \"CandidateId\": 2\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5003/leader/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"leader",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assemble and add new block",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/database/tables/blocks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"database",
+						"tables",
+						"blocks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete from Table (after deleting you should proceed \"DBCC CHECKIDENT ('TableName', RESEED, 0);\" on database to reset id attribution. Aslo before deleting blocks, delete votes",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/database/tables/blocks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"database",
+						"tables",
+						"blocks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get private key",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44335/setup/node/PrivateKey",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44335",
+					"path": [
+						"setup",
+						"node",
+						"PrivateKey"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
