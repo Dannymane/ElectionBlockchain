@@ -2,7 +2,7 @@
 using ElectionBlockchain.Model.DataModels;
 using System.Text.RegularExpressions;
 
-namespace SchoolRegister.Services.Configuration.AutoMapperProfiles;
+namespace ElectionBlockchain.Services.Configuration.AutoMapperProfiles;
 public class MainProfile : Profile
 {
    public MainProfile()

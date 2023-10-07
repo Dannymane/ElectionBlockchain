@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ElectionBlockchain.Model.DataModels;
 using ElectionBlockchain.Model.DataTrasferObjects;
+using ElectionBlockchain.DAL.EF;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

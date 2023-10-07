@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ElectionBlockchain.Model.DataTrasferObjects;
 using ElectionBlockchain.Services.Interfaces;
+using ElectionBlockchain.DAL.EF;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;

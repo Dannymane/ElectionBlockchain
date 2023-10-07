@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 
+namespace ElectionBlockchain.DAL.EF;
 public class ApplicationDbContext : DbContext
 {
    // table properties
@@ -95,7 +96,7 @@ public class ApplicationDbContext : DbContext
          .IsRequired(false); // Allow null values for VoteId in Citizen table
                              //.OnDelete(DeleteBehavior.Cascade);
 
-      //For testing. For real app uncomment this
+      
       modelBuilder.Entity<Vote>()
           .HasOne(v => v.Citizen)
           .WithOne(c => c.Vote)

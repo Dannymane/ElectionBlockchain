@@ -18,5 +18,7 @@ namespace ElectionBlockchain.Model.DataModels
       public virtual Block? PreviousBlock { get; set; }
       public string? PreviousBlockHash { get; set; }
       public string? Hash { get; set; }
+
+      protected internal int Number { get; set; }
    }
 }

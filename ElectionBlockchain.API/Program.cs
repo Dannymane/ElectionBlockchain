@@ -1,9 +1,9 @@
 using ElectionBlockchain.Services.ConcreteServices;
 using ElectionBlockchain.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using SchoolRegister.Services.Configuration.AutoMapperProfiles;
+using ElectionBlockchain.Services.Configuration.AutoMapperProfiles;
 using System.Data;
-
+using ElectionBlockchain.DAL.EF;
 
 var builder = WebApplication.CreateBuilder(args);
 

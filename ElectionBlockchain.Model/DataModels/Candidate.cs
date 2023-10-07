@@ -14,5 +14,17 @@ namespace ElectionBlockchain.Model.DataModels
       public string Surname { get; set; }
       [JsonIgnore]
       public virtual IList<Vote>? Votes { get; set; }
+      protected static int Test { get; set; }
+
+   }
+   public class Candidate2 : Candidate
+   {
+
+   }
+   public class Candidate3 : Candidate2 {
+      public int GetTest()
+      {
+         return Test;
+      }
    }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ElectionBlockchain.DAL.EF;
 using ElectionBlockchain.Model.DataModels;
 using ElectionBlockchain.Model.DataTrasferObjects;
 using ElectionBlockchain.Services.Interfaces;
