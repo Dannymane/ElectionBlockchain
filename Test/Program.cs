@@ -6,7 +6,7 @@ using System.Text;
 
 class Program
 {
-   static void Main()
+   static void Main2()
    {
       // Create a SHA256 hash
       using (SHA256 sha256 = SHA256.Create())
