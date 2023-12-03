@@ -21,28 +21,41 @@ class RSACSPSample
    public static async Task<int> wait3secAsync()
    {
       Thread.Sleep(5000); //block the whole program
-      wait2secAndNokAsync();
-      await Task.Run(() => Thread.Sleep(3000));
+      wait2secAndNokAsync();                                       //starts simultaneously
+      await Task.Run(() => Thread.Sleep(3000));                    //starts simultaneously   
       Thread.Sleep(3000); //does not block the whole program
 
       return 3; 
    }
-   //async method runs asynchronously simultaneously with other async methods
-   //async method runs synchronously with 'await'
-   //if async mehtod has synchronous method, it will run synchronously,
-   //    but the other async methods will run asynchronously. Also async methods wait for synchronous methods to finish:
+   /*
+   async method runs asynchronously simultaneously with other async methods
+   async method runs synchronously with 'await'
+   if async mehtod has synchronous method, it will run synchronously,
+       but the other async methods will run asynchronously.Also async methods wait for synchronous methods to finish:
    
-   // 1 2 and middle sync start at the same time
-   // 3 4 and last sync start after middle sync finish
-   //If Main method not awaited, the middle will block program, but the last will not block program
+    1 2 and middle sync start at the same time
+    3 4 and last sync start after middle sync finish
+   If Main method not awaited, the middle will block program, but the last will not block program
 
-   // 1 async method
-   // 2 async method
-   // middle sync method
-   // 3 async method
-   // 4 async method
-   // last sync method
+    1 async method
+    2 async method
+    middle sync method
+    3 async method
+    4 async method
+    last sync method
 
+   Why middle sync block the whole program? The main thread startS execute synchronously non-awaited async method
+   iF the first method await async -> the main thread pass tasks to other threads
+   if the first method is sync -> the main thread get stuck until he finish sync method (and just after finishing 
+   he pass tasks to other threads
+   if the first method non-awaited async -> it doesn't make an impact, because:
+
+    1 async method
+    2 async method
+    middle sync method
+
+   run simultaneously and it is the same as 'if the first method is sync'
+   */
 
 
    public static async Task Test1Async()
@@ -50,21 +63,21 @@ class RSACSPSample
       var watch = new System.Diagnostics.Stopwatch();
       watch.Start();
       Task<int> a = wait3secAsync();
-      Console.Out.WriteLineAsync("ok");
-      await wait1secAsync();
-      wait2secAsync();
+      //Console.Out.WriteLineAsync("ok");
+      //await wait1secAsync();
+      //wait2secAsync();
       watch.Stop();
       Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
       Console.WriteLine(a.Result);
    }
 
-   static async Task Main2()
+   static async Task Main()
    {
-      //await Test1Async();
-      //Console.ReadLine();
-
-      await MakeTeaAsync();
+      await Test1Async();
       Console.ReadLine();
+
+      //await MakeTeaAsync();
+      //Console.ReadLine();
    }
 
    public static async Task MakeTeaAsync()
@@ -91,7 +104,7 @@ class RSACSPSample
 
    public static async Task<string> BoilWaterAsync()
    {
-      await Task.Delay(1); //From now BoilWaterAsync do another thread
+      await Task.Delay(1); //From now BoilWaterAsync do another thread, because the first method is await async
       //Console.WriteLine("Thread id: " + Thread.CurrentThread.ManagedThreadId); //4
 
       //DelaySecondAsync(); //Thread 7
