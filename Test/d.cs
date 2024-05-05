@@ -47,7 +47,7 @@ class RSACSPSample
    Why middle sync block the whole program? The main thread startS execute synchronously non-awaited async method
    iF the first method await async -> the main thread pass tasks to other threads
    if the first method is sync -> the main thread get stuck until he finish sync method (and just after finishing 
-   he pass tasks to other threads
+   it checks again if the next method is async or sync. If sync - it's blocked again.)
    if the first method non-awaited async -> it doesn't make an impact, because:
 
     1 async method
