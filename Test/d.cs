@@ -56,7 +56,15 @@ class RSACSPSample
 
     run simultaneously and it is the same as 'if the first method is sync'
 
-     Attention. 'await Task.WhenAll(tasks);' will not pass to another thread if tasks are sync 
+    -----------------------------------------------------------------------------------------------
+     Attention!
+
+    var consumeTasks = kafkaConsumerServices.Select(consumer => consumer.StartConsuming(stoppingToken));
+    await Task.WhenAll(consumeTasks);
+
+    will not pass to another thread if consumeTasks are sync ( .StartConsuming is async but has sync code)
+    Why? Because firstly main thread iterates over consumeTasks and starts them, and only after Task object is
+    created, it calls await Task.WhenAll(consumeTasks) and pass to another thread. 
     */
 
 
